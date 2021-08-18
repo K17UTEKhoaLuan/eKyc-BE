@@ -3,6 +3,6 @@ dlib==19.22.0
 easyocr==1.3.2
 face_recognition==1.3.0
 flask==2.0.1
-pillow==7.0.0
-gunicorn
-pytesseract
+pillow==8.3.1
+gunicorn==20.1.0
+pytesseract==0.3.8

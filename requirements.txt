@@ -2,7 +2,6 @@ gunicorn
 cmake
 opencv-python
 dlib
-easyocr
 face_recognition
 flask
 pillow

@@ -33,7 +33,7 @@
 import cv2
 import numpy as np
 import string
-import easyocr
+# import easyocr
 from PIL import Image
 import pytesseract as pt
 import re
@@ -232,12 +232,15 @@ def detectFace(img):
     # cv2.imshow(winname="Face", mat=img)
 
 
-def scan_name(img, reader):
+def scan_name(img):
     imgCropNameLineOne = cropImageIdentifyNameLineOne(img)
     # cv2.imshow("name", imgCropNameLineOne)
     imgCropNameLineTwo = cropImageIdentifyNameLineTwo(img)
-    name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
-        imgCropNameLineOne)) > 0) else reader.readtext(imgCropNameLineTwo)
+    # name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
+    #     imgCropNameLineOne)) > 0) else reader.readtext(imgCropNameLineTwo)
+    nameOne = pt.image_to_string(imgCropNameLineOne,lang='en')
+    nameOne = pt.image_to_string(imgCropNameLineTwo,lang='en')
+    return nameOne + nameOne
     if(len(name) > 0):
         chars = re.escape(string.punctuation)
         return re.sub(r'['+chars+']', ' ', (name[0])[1])
@@ -245,9 +248,11 @@ def scan_name(img, reader):
         return ""
 
 
-def scan_identify_number(img, reader):
+def scan_identify_number(img):
     imgCropNumber = cropImageIdentifyNumber(img)
-    number = reader.readtext(imgCropNumber)
+    # number = reader.readtext(imgCropNumber)
+    number = pt.image_to_string(imgCropNumber,lang='en')
+    return number
     if(len(number) > 0):
         for num in number:
             chars = re.escape(string.punctuation)
@@ -259,9 +264,11 @@ def scan_identify_number(img, reader):
         return ""
 
 
-def scan_birthday(img, reader):
+def scan_birthday(img):
     imgCropBirthday = cropImageIdentifyBirthday(img)
-    birthday = reader.readtext(imgCropBirthday)
+    # birthday = reader.readtext(imgCropBirthday)
+    birthday = pt.image_to_string(imgCropBirthday,lang='en')
+    return birthday
     if(len(birthday) > 0):
         for sub_birth in birthday:
             day_month_year = sub_birth[1].split("-")
@@ -301,13 +308,13 @@ def valid_front_side_identity(img_name):
         detectFace(imgCropImage)
         # img_object = cv2.Canny(img_object,0,10)
         #######################################################
-        reader = easyocr.Reader(['en'])
-        number = scan_identify_number(imgWarped, reader)
-        birthday = scan_birthday(imgWarped, reader)
-        name = scan_name(imgWarped, reader)
+        # reader = easyocr.Reader(['en'])
+        number = scan_identify_number(imgWarped)
+        birthday = scan_birthday(imgWarped)
+        name = scan_name(imgWarped)
         #######################################################
         #imgCropNameLineOne = cropImageIdentifyNameLineOne(imgWarped)
-        #img_text = pt.image_to_string(imgCropNameLineOne,lang='en')
+        
         chars = re.escape(string.punctuation)
         #img_text=re.sub(r'['+chars+']', '',img_text)
         # numberr = (number[0])[1]

@@ -34,7 +34,7 @@ import cv2
 import numpy as np
 import string
 # import easyocr
-from PIL import Image
+# from PIL import Image
 import pytesseract as pt
 import re
 import dlib

@@ -1,5 +1,4 @@
 import base64
-import cv2
 # file = 'mat.png'
 # image = open(file, 'rb')
 # image_read = image.read()

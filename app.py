@@ -1,5 +1,5 @@
 import flask
-from flask import send_file, render_template, request
+from flask import request
 import os
 import convert
 import documentScanner

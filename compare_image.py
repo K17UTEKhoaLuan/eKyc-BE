@@ -6,7 +6,7 @@ import scipy.misc
 import warnings
 import face_recognition.api as face_recognition
 import sys
-import cv2
+# import cv2
 
 def scan_known_people(known_people_folder):
     known_names = []

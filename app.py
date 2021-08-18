@@ -30,6 +30,7 @@ def upload_file():
 def frontside():
     data = request.json
     convert.convert_base64_to_image(data, "frontside")
+    print("frontside/{}_frontside.jpg".format(data["name"]))
     documentScanner.valid_front_side_identity("frontside/{}_frontside.jpg".format(data["name"]))
     return "done"
 

@@ -238,8 +238,8 @@ def scan_name(img):
     imgCropNameLineTwo = cropImageIdentifyNameLineTwo(img)
     # name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
     #     imgCropNameLineOne)) > 0) else reader.readtext(imgCropNameLineTwo)
-    nameOne = pt.image_to_string(imgCropNameLineOne,lang='en')
-    nameOne = pt.image_to_string(imgCropNameLineTwo,lang='en')
+    nameOne = pt.image_to_string(imgCropNameLineOne)
+    nameOne = pt.image_to_string(imgCropNameLineTwo)
     return nameOne + nameOne
     if(len(name) > 0):
         chars = re.escape(string.punctuation)
@@ -251,7 +251,7 @@ def scan_name(img):
 def scan_identify_number(img):
     imgCropNumber = cropImageIdentifyNumber(img)
     # number = reader.readtext(imgCropNumber)
-    number = pt.image_to_string(imgCropNumber,lang='en')
+    number = pt.image_to_string(imgCropNumber)
     return number
     if(len(number) > 0):
         for num in number:
@@ -267,7 +267,7 @@ def scan_identify_number(img):
 def scan_birthday(img):
     imgCropBirthday = cropImageIdentifyBirthday(img)
     # birthday = reader.readtext(imgCropBirthday)
-    birthday = pt.image_to_string(imgCropBirthday,lang='en')
+    birthday = pt.image_to_string(imgCropBirthday)
     return birthday
     if(len(birthday) > 0):
         for sub_birth in birthday:

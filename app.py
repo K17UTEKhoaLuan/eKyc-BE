@@ -12,7 +12,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/', methods=['GET'])
 def home():
-    return send_file("a.jpg")
+    return "hello"
 
 
 @app.route('/upload', methods=['GET', 'POST'])

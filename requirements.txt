@@ -6,4 +6,4 @@ face_recognition
 flask
 pillow
 pytesseract
-
+opencv-python-headless

@@ -7,6 +7,6 @@ flask
 pillow
 pytesseract
 tesseract
-tesseract-ocr
+
 opencv-python-headless
 scipy

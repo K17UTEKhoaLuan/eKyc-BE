@@ -39,7 +39,7 @@ import pytesseract as pt
 import re
 import dlib
 import compare_image
-pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
+
 ###################################
 widthImg = 856
 heightImg = 539

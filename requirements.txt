@@ -1,4 +1,5 @@
 gunicorn
+cmake
 opencv-python
 dlib
 face_recognition

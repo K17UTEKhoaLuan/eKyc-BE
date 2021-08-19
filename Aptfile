@@ -2,7 +2,7 @@ libtesseract-dev
 gzip
 unzip
 cmake
-libtiff
+libtiff-dev
 libpng-dev
 libleptonica-dev 
 liblept5

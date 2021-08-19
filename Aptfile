@@ -1,8 +1,6 @@
 libtesseract-dev
 libleptonica-dev 
 liblept5
-add-apt-repository ppa:linuxuprising/libpng12
-apt update
-libpng12-0
+https://packages.debian.org/en/jessie/libpng12-0
 tesseract-ocr
 tesseract-ocr-eng

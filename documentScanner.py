@@ -40,6 +40,7 @@ import re
 import dlib
 import compare_image
 
+
 ###################################
 widthImg = 856
 heightImg = 539

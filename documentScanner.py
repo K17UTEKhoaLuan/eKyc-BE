@@ -39,7 +39,7 @@ import pytesseract as pt
 import re
 import dlib
 import compare_image
-
+tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/bin/tesseract/4.0.0_1/share/tessdata/"'
 # pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 ###################################
 widthImg = 856
@@ -239,8 +239,8 @@ def scan_name(img):
     imgCropNameLineTwo = cropImageIdentifyNameLineTwo(img)
     # name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
     #     imgCropNameLineOne)) > 0) else reader.readtext(imgCropNameLineTwo)
-    nameOne = pt.image_to_string(imgCropNameLineOne,lang='eng')
-    nameOne = pt.image_to_string(imgCropNameLineTwo,lang='eng')
+    nameOne = pt.image_to_string(imgCropNameLineOne,lang='eng',config=tessdata_dir_config)
+    nameOne = pt.image_to_string(imgCropNameLineTwo,lang='eng',config=tessdata_dir_config)
     return nameOne + nameOne
     if(len(name) > 0):
         chars = re.escape(string.punctuation)
@@ -252,7 +252,7 @@ def scan_name(img):
 def scan_identify_number(img):
     imgCropNumber = cropImageIdentifyNumber(img)
     # number = reader.readtext(imgCropNumber)
-    number = pt.image_to_string(imgCropNumber,lang='eng')
+    number = pt.image_to_string(imgCropNumber,lang='eng',config=tessdata_dir_config)
     return number
     if(len(number) > 0):
         for num in number:
@@ -268,7 +268,7 @@ def scan_identify_number(img):
 def scan_birthday(img):
     imgCropBirthday = cropImageIdentifyBirthday(img)
     # birthday = reader.readtext(imgCropBirthday)
-    birthday = pt.image_to_string(imgCropBirthday,lang='eng')
+    birthday = pt.image_to_string(imgCropBirthday,lang='eng',config=tessdata_dir_config)
     return birthday
     if(len(birthday) > 0):
         for sub_birth in birthday:

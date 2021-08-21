@@ -39,7 +39,7 @@ import pytesseract as pt
 import re
 import dlib
 import compare_image
-tessdata_dir_config = r'--tessdata-dir "/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
+tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
 # pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 ###################################
 widthImg = 856

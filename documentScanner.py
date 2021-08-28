@@ -284,7 +284,7 @@ def scan_birthday(img):
     # thr = cv2.threshold(src=imgCropBirthday, thresh=0, maxval=255, type=cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
     # cv2.imshow("th", thr)
     birthday = pt.image_to_string(imgCropBirthday, lang='eng',
-                                  config='--psm 9 --oem 1 -c tessedit_char_whitelist=0123456789-O0 ')
+                                  config=tessdata_dir_config+' --psm 9 --oem 1 -c tessedit_char_whitelist=0123456789-O0 ')
     chars = """!"\#\$%\&'\(\)\*\+,./:;<=>\?@\[\\\]\^_`\{\|\}\~"""
     print(chars)
     birthday = re.split(r'[|\n |\f |\x0c]', birthday)

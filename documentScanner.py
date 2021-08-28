@@ -30,6 +30,7 @@
 #     imgThreshold = cv2.erode(imgDial, kernel, interations =1)
 
 
+from shlex import split
 import cv2
 import numpy as np
 import string
@@ -39,7 +40,8 @@ import pytesseract as pt
 import re
 import dlib
 import compare_image
-tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
+# tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
+tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
 # pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 ###################################
 widthImg = 856
@@ -65,7 +67,7 @@ def preProcessing(img):
     return imgThres
 
 
-def getContours(img,imgContour):
+def getContours(img, imgContour):
     biggest = np.array([])
     maxArea = 0
     contours, hierarchy = cv2.findContours(
@@ -80,7 +82,7 @@ def getContours(img,imgContour):
                 biggest = approx
                 maxArea = area
     cv2.drawContours(imgContour, biggest, -1, (255, 0, 0), 20)
-    return biggest,imgContour
+    return biggest, imgContour
 
 
 def reorder(myPoints):
@@ -151,7 +153,7 @@ def stackImages(scale, imgArray):
 
 
 def cropImageIdentifyNumber(img):
-    y = 108
+    y = 115
     x = 405
     h = 190
     w = 700
@@ -233,15 +235,23 @@ def detectFace(img):
     # cv2.imshow(winname="Face", mat=img)
 
 
+def split_string(pre_string):
+    chars = re.escape(string.punctuation)
+    return re.split(r'['+chars+" |\n"+']', pre_string)
+
+
 def scan_name(img):
     imgCropNameLineOne = cropImageIdentifyNameLineOne(img)
-    # cv2.imshow("name", imgCropNameLineOne)
     imgCropNameLineTwo = cropImageIdentifyNameLineTwo(img)
+    # cv2.imshow("name", imgCropNameLineOne)
+    # cv2.imshow("name1", imgCropNameLineTwo)
     # name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
     #     imgCropNameLineOne)) > 0) else reader.readtext(imgCropNameLineTwo)
-    nameOne = pt.image_to_string(imgCropNameLineOne,lang='eng',config=tessdata_dir_config)
-    nameOne = pt.image_to_string(imgCropNameLineTwo,lang='eng',config=tessdata_dir_config)
-    return nameOne + nameOne
+    nameOne = pt.image_to_string(
+        imgCropNameLineOne, lang='eng', config=tessdata_dir_config)
+    nameTwo = pt.image_to_string(
+        imgCropNameLineTwo, lang='eng', config=tessdata_dir_config)
+    return nameOne + nameTwo
     if(len(name) > 0):
         chars = re.escape(string.punctuation)
         return re.sub(r'['+chars+']', ' ', (name[0])[1])
@@ -252,14 +262,14 @@ def scan_name(img):
 def scan_identify_number(img):
     imgCropNumber = cropImageIdentifyNumber(img)
     # number = reader.readtext(imgCropNumber)
-    number = pt.image_to_string(imgCropNumber,lang='eng',config=tessdata_dir_config)
-    return number
+    number = pt.image_to_string(
+        imgCropNumber, lang='eng', config=tessdata_dir_config)
+    number = split_string(number)
+    # return a
     if(len(number) > 0):
         for num in number:
-            chars = re.escape(string.punctuation)
-            sub_number = re.sub(r'['+chars+']', '', num[1])
-            if (len(sub_number) == 9):
-                return sub_number
+            if (len(num) == 9):
+                return num
         return ""
     else:
         return ""
@@ -268,13 +278,26 @@ def scan_identify_number(img):
 def scan_birthday(img):
     imgCropBirthday = cropImageIdentifyBirthday(img)
     # birthday = reader.readtext(imgCropBirthday)
-    birthday = pt.image_to_string(imgCropBirthday,lang='eng',config=tessdata_dir_config)
-    return birthday
+    # cv2.imshow("a",imgCropBirthday)
+    # birthday = pt.image_to_string(
+    #     imgCropBirthday, config=tessdata_dir_config)
+    # thr = cv2.threshold(src=imgCropBirthday, thresh=0, maxval=255, type=cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
+    # cv2.imshow("th", thr)
+    birthday = pt.image_to_string(imgCropBirthday, lang='eng',
+                                  config='--psm 9 --oem 1 -c tessedit_char_whitelist=0123456789-O0 ')
+    chars = """!"\#\$%\&'\(\)\*\+,./:;<=>\?@\[\\\]\^_`\{\|\}\~"""
+    print(chars)
+    birthday = re.split(r'[|\n |\f |\x0c]', birthday)
+    print(birthday)
+    # birthday = birthday.split(" ")
+    # print(birthday)
+    # return birthday
     if(len(birthday) > 0):
         for sub_birth in birthday:
-            day_month_year = sub_birth[1].split("-")
+            print(sub_birth)
+            day_month_year = sub_birth.split("-")
             if(len(day_month_year) == 3):
-                return sub_birth[1]
+                return sub_birth
         return ""
     else:
         return ""
@@ -287,7 +310,7 @@ def valid_front_side_identity(img_name):
 
     imgThres = preProcessing(img)
     # cv2.imshow("a", imgThres)
-    biggest,imgContour = getContours(imgThres,imgContour)
+    biggest, imgContour = getContours(imgThres, imgContour)
     print(biggest)
     if biggest.size != 0:
         imgWarped = getWarp(img, biggest)
@@ -315,22 +338,31 @@ def valid_front_side_identity(img_name):
         name = scan_name(imgWarped)
         #######################################################
         #imgCropNameLineOne = cropImageIdentifyNameLineOne(imgWarped)
-        
+
         chars = re.escape(string.punctuation)
-        #img_text=re.sub(r'['+chars+']', '',img_text)
+        # print(chars)
+        # img_text=re.sub(r'['+chars+']', '',img_text)
         # numberr = (number[0])[1]
-        # namee = re.sub(r'['+chars+']', ' ', namee)
+        name = re.sub(r'['+chars+"‘"+']', '', name)
         # print(img_text)
-        print(name)
-        print(number)
-        print(birthday)
+        # print(name)
+        print("number", number)
+        print("birthday", birthday)
         print(distance, result)
+        return {
+            "result": True,
+            "number": number,
+            "birthday": birthday
+        }
     else:
         # imageArray = ([img, imgThres],
         #               [img, img])
-        imageArray = ([imgContour, img])
+        # imageArray = ([imgContour, img])
+        return {
+            "result": False
+        }
 
-    stackedImages = stackImages(0.6, imageArray)
+    # stackedImages = stackImages(0.6, imageArray)
     # cv2.imshow("WorkFlow", stackedImages)
 
     # if cv2.waitKey(1) and 0xFF == ord('q'):

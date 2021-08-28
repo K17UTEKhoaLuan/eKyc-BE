@@ -43,8 +43,8 @@ def test_image(image_to_check, known_names, known_face_encodings):
             distance = face_recognition.face_distance(known_face_encodings, unknown_encoding)
             # print(distance)
             # print("True") if True in result else print("False ")
-        print(distance,result)
-        print(len(distance))
+        # print(distance,result)
+        # print(len(distance))
         if (len(distance)>0):
              return distance[0],result[0]
         else: 

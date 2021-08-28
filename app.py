@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, File, UploadFile, BackgroundTasks
 from fastapi.templating import Jinja2Templates
-import os
+
+from numpy.core.numeric import identity
 import convert
 import documentScanner
 from pydantic import BaseModel
@@ -12,6 +13,9 @@ app = FastAPI()
 
 class Frontside(BaseModel):
     name: str
+    identityNumber: str
+    address: str
+    birthday: str
     image: str
 
 @app.get('/')
@@ -35,7 +39,7 @@ def frontside(item:Frontside):
     # data = request.json
     convert.convert_base64_to_image(item, "frontside")
     print("frontside/{}_frontside.jpg".format(item.name))
-    documentScanner.valid_front_side_identity("frontside/{}_frontside.jpg".format(item.name))
-    return "done"
+    result=documentScanner.valid_front_side_identity("frontside/{}_frontside.jpg".format(item.name))
+    return result
 
 

@@ -8,4 +8,3 @@ face_recognition
 pillow
 pytesseract
 opencv-python-headless
-re

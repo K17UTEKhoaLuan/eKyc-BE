@@ -8,5 +8,4 @@ face_recognition
 pillow
 pytesseract
 opencv-python-headless
-scipy==1.7.1
 re

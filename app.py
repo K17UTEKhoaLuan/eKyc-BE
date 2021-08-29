@@ -76,14 +76,14 @@ def seen(name: str):
     #     # return FileResponse(file_path, media_type="image/jpg")
     # else:
     #     return "not exist"
-    _, img = processImage.open_image("demo/{}_demo.jpg".format(name))
-    if(_):
-        base64_string=convert.convert_image_to_base64(img)
-        return {
-            "result": True,
-            "base64String":base64_string
-        }
-    else:
-        return {
-            "result": False
-        }
+    # _, img = processImage.open_image("demo/{}_demo.jpg".format(name))
+    # if(_):
+    base64_string=convert.convert_image_to_base64("demo/{}_demo.jpg".format(name))
+    return {
+        "result": True,
+        "base64String":base64_string
+    }
+    # else:
+        # return {
+            # "result": False
+        # }

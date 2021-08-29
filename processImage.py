@@ -1,16 +1,16 @@
 import cv2
-
+import PIL.Image
 widthImg = 856
 heightImg = 539
 
 
 def open_image(image_name):
-    img = cv2.imread(image_name)
-    print(img)
-    if(len(img)>0):
-        return True, img
-    else: 
-        return False, ""
+    # img = cv2.imread(image_name)
+    # if(len(img)>0):
+    #     return True, img
+    # else: 
+    #     return False, ""
+    image = open(image_name, 'rb')
 
 
 def cropImageIdentifyNumber(img):

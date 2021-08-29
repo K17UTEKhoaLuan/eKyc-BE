@@ -3,6 +3,16 @@ import cv2
 widthImg = 856
 heightImg = 539
 
+
+def open_image(image_name):
+    img = cv2.imread(image_name)
+    print(img)
+    if(len(img)>0):
+        return True, img
+    else: 
+        return False, ""
+
+
 def cropImageIdentifyNumber(img):
     y = 115
     x = 405
@@ -11,6 +21,7 @@ def cropImageIdentifyNumber(img):
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
     return crop
+
 
 def cropIdentity(img_name, size):
     img = cv2.imread(img_name)

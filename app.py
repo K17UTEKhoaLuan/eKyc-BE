@@ -4,7 +4,7 @@ from fastapi.responses import FileResponse
 from numpy.core.numeric import identity
 import convert
 import documentScanner
-import identityCut
+import processImage
 from pydantic import BaseModel
 import os
 # UPLOAD_FOLDER = './cmnd'
@@ -64,15 +64,26 @@ def frontside(item: Frontside):
 @app.post("/democrop")
 def crop(item: DemoImage):
     convert.convert_base64_to_image(item, "demo")
-    identityCut.cropIdentity("demo/{}_demo.jpg".format(item.name), item)
+    processImage.cropIdentity("demo/{}_demo.jpg".format(item.name), item)
     return "done"
 
 
 @app.get("/seen")
 def seen(name: str):
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    file_path = os.path.join(dir_path, "demo/{}_demo.jpg".format(name))
-    if(os.path.exists(dir_path)):
-        return FileResponse(file_path, media_type="image/jpg")
+    # dir_path = os.path.dirname(os.path.realpath(__file__))
+    # file_path = os.path.join(dir_path, "demo/{}_demo.jpg".format(name))
+    # if(os.path.exists(dir_path)):
+    #     # return FileResponse(file_path, media_type="image/jpg")
+    # else:
+    #     return "not exist"
+    _, img = processImage.open_image("demo/{}_demo.jpg".format(name))
+    if(_):
+        base64_string=convert.convert_image_to_base64(img)
+        return {
+            "result": True,
+            "base64String":base64_string
+        }
     else:
-        return "not exist"
+        return {
+            "result": False
+        }

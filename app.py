@@ -1,3 +1,4 @@
+from sys import path
 from fastapi import FastAPI, Request, File, UploadFile, BackgroundTasks
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse
@@ -20,6 +21,10 @@ class Frontside(BaseModel):
     address: str
     birthday: str
     image: str
+    imageWidth: int
+    imageHeight: int
+    identityWidth: int
+    identityHeight: int
 
 
 class DemoImage(BaseModel):
@@ -55,9 +60,13 @@ def home():
 def frontside(item: Frontside):
     # data = request.json
     convert.convert_base64_to_image(item, "frontside")
-    print("frontside/{}_frontside.jpg".format(item.name))
+    path_name = "frontside/{}_frontside.jpg".format(item.name)
+    processImage.cropIdentity(path_name, item)
+    print(path_name)
     result = documentScanner.valid_front_side_identity(
-        "frontside/{}_frontside.jpg".format(item.name))
+        path_name)
+    base64_string=convert.convert_image_to_base64(path_name)
+    result["base64String"] =base64_string
     return result
 
 

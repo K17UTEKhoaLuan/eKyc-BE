@@ -26,12 +26,12 @@ def cropImageIdentifyNumber(img):
 def cropIdentity(img_name, size):
     img = cv2.imread(img_name)
     print(size.name)
-    coordinate_up_left = (size.imageWidth - size.identityWidth)/2
-    coordinate_left_up = (size.imageHeight - size.identityHeight)/2
+    coordinate_up_left = (size.imageHeight - size.identityHeight)/2 
+    coordinate_left_up = (size.imageWidth - size.identityWidth)/2
     y = int(coordinate_up_left)
-    h = int(coordinate_up_left + size.identityWidth)
+    h = int(coordinate_up_left + size.identityHeight)
     x = int(coordinate_left_up)
-    w = int(coordinate_left_up + size.identityHeight)
+    w = int(coordinate_left_up + size.identityWidth)
     crop = img[y:h, x:w]
-    cv2.imwrite("demo/{}_demo.jpg".format(size.name), crop)
+    cv2.imwrite("frontside/{}_frontside.jpg".format(size.name), crop)
     return crop

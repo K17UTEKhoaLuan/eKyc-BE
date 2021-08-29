@@ -40,8 +40,8 @@ import pytesseract as pt
 import re
 import dlib
 import compare_image
-tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
-# tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
+# tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
+tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
 # pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 ###################################
 widthImg = 856
@@ -263,7 +263,8 @@ def scan_identify_number(img):
     imgCropNumber = cropImageIdentifyNumber(img)
     # number = reader.readtext(imgCropNumber)
     number = pt.image_to_string(
-        imgCropNumber, lang='eng', config=tessdata_dir_config)
+        imgCropNumber, lang='eng', 
+        config=tessdata_dir_config+' --psm 9 --oem 1 -c tessedit_char_whitelist=0123456789 ')
     number = split_string(number)
     # return a
     if(len(number) > 0):
@@ -345,7 +346,7 @@ def valid_front_side_identity(img_name):
         # numberr = (number[0])[1]
         name = re.sub(r'['+chars+"‘"+']', '', name)
         # print(img_text)
-        # print(name)
+        print("+"+name+"+")
         print("number", number)
         print("birthday", birthday)
         print(distance, result)

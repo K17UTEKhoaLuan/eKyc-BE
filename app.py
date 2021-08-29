@@ -1,15 +1,18 @@
 from fastapi import FastAPI, Request, File, UploadFile, BackgroundTasks
 from fastapi.templating import Jinja2Templates
-
+from fastapi.responses import FileResponse
 from numpy.core.numeric import identity
 import convert
 import documentScanner
+import identityCut
 from pydantic import BaseModel
+import os
 # UPLOAD_FOLDER = './cmnd'
 
 
 app = FastAPI()
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 class Frontside(BaseModel):
     name: str
@@ -17,6 +20,20 @@ class Frontside(BaseModel):
     address: str
     birthday: str
     image: str
+
+
+class DemoImage(BaseModel):
+    name: str
+    imageWidth: int
+    imageHeight: int
+    image: str
+    identityWidth: int
+    identityHeight: int
+
+
+class Seen(BaseModel):
+    name: str
+
 
 @app.get('/')
 def home():
@@ -35,11 +52,27 @@ def home():
 
 
 @app.post("/frontside")
-def frontside(item:Frontside):
+def frontside(item: Frontside):
     # data = request.json
     convert.convert_base64_to_image(item, "frontside")
     print("frontside/{}_frontside.jpg".format(item.name))
-    result=documentScanner.valid_front_side_identity("frontside/{}_frontside.jpg".format(item.name))
+    result = documentScanner.valid_front_side_identity(
+        "frontside/{}_frontside.jpg".format(item.name))
     return result
 
 
+@app.post("/democrop")
+def crop(item: DemoImage):
+    convert.convert_base64_to_image(item, "demo")
+    identityCut.cropIdentity("demo/{}_demo.jpg".format(item.name), item)
+    return "done"
+
+
+@app.get("/seen")
+def seen(name: str):
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    file_path = os.path.join(dir_path, "demo/{}_demo.jpg".format(name))
+    if(os.path.exists(dir_path)):
+        return FileResponse(file_path, media_type="image/jpg")
+    else:
+        return "not exist"

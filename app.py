@@ -1,10 +1,8 @@
 from sys import path
 from fastapi import FastAPI, Request
 from fastapi.responses import  JSONResponse
-import documentScanner
-from src.process import processImage
+from src.api.cmnd import documentScanner, validation
 from pydantic import BaseModel
-import validation
 import src.utils.error_handle as error_handle
 from src.api import cmnd, image
 

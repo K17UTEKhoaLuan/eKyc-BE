@@ -1,4 +1,3 @@
-import base64
 from fastapi import APIRouter
 from . import convert
 from .model import Image

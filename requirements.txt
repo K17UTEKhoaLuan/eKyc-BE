@@ -9,4 +9,4 @@ pillow
 pytesseract
 opencv-python-headless
 scipy
-aiofiles
+python-multipart

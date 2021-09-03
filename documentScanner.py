@@ -40,8 +40,9 @@ import pytesseract as pt
 import re
 import dlib
 import compare_image
-tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
-# tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
+from src.process import processImage
+# tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
+tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
 # pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 ###################################
 widthImg = 856
@@ -152,54 +153,7 @@ def stackImages(scale, imgArray):
     return ver
 
 
-def cropImageIdentifyNumber(img):
-    y = 115
-    x = 405
-    h = 190
-    w = 700
-    crop = img[y:h, x:w]
-    crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
-    return crop
 
-
-def cropImageIdentifyNameLineOne(img):
-    y = 165
-    x = 360
-    h = 249
-    w = 840
-    crop = img[y:h, x:w]
-    crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
-    return crop
-
-
-def cropImageIdentifyNameLineTwo(img):
-    y = 227
-    x = 228
-    h = 290
-    w = 850
-    crop = img[y:h, x:w]
-    crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
-    return crop
-
-
-def cropImageIdentifyBirthday(img):
-    y = 285
-    x = 400
-    h = 350
-    w = 840
-    crop = img[y:h, x:w]
-    crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
-    return crop
-
-
-def cropImageIdentifyImage(img):
-    y = 180
-    x = 0
-    h = 520
-    w = 260
-    crop = img[y:h, x:w]
-    # crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
-    return crop
 
 
 def detectFace(img):
@@ -237,12 +191,19 @@ def detectFace(img):
 
 def split_string(pre_string):
     chars = re.escape(string.punctuation)
-    return re.split(r'['+chars+" |\n"+']', pre_string)
+    
+    pre_string=" ".join(pre_string.split())
+    print("pre_string",pre_string)
+    list_string = re.split(r'['+chars+" |\n |\f |\x0c"+']', pre_string)
+    while '' in list_string: list_string.remove('')
+    print(list_string)
+    # list_string.remove("")
+    return list_string, " ".join(list_string).strip()
 
 
 def scan_name(img):
-    imgCropNameLineOne = cropImageIdentifyNameLineOne(img)
-    imgCropNameLineTwo = cropImageIdentifyNameLineTwo(img)
+    imgCropNameLineOne = processImage.cropImageIdentifyNameLineOne(img)
+    imgCropNameLineTwo = processImage.cropImageIdentifyNameLineTwo(img)
     # cv2.imshow("name", imgCropNameLineOne)
     # cv2.imshow("name1", imgCropNameLineTwo)
     # name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
@@ -251,6 +212,10 @@ def scan_name(img):
         imgCropNameLineOne, lang='eng', config=tessdata_dir_config)
     nameTwo = pt.image_to_string(
         imgCropNameLineTwo, lang='eng', config=tessdata_dir_config)
+    _, nameOne = split_string(nameOne)
+    _, nameTwo = split_string(nameTwo)
+    # print("++"+nameOne+"++")
+    # print("++"+nameTwo+"++")
     return nameOne + nameTwo
     if(len(name) > 0):
         chars = re.escape(string.punctuation)
@@ -260,12 +225,12 @@ def scan_name(img):
 
 
 def scan_identify_number(img):
-    imgCropNumber = cropImageIdentifyNumber(img)
+    imgCropNumber = processImage.cropImageIdentifyNumber(img)
     # number = reader.readtext(imgCropNumber)
     number = pt.image_to_string(
-        imgCropNumber, lang='eng', 
+        imgCropNumber, lang='eng',
         config=tessdata_dir_config+' --psm 9 --oem 1 -c tessedit_char_whitelist=0123456789 ')
-    number = split_string(number)
+    number, _ = split_string(number)
     # return a
     if(len(number) > 0):
         for num in number:
@@ -277,7 +242,7 @@ def scan_identify_number(img):
 
 
 def scan_birthday(img):
-    imgCropBirthday = cropImageIdentifyBirthday(img)
+    imgCropBirthday = processImage.cropImageIdentifyBirthday(img)
     # birthday = reader.readtext(imgCropBirthday)
     # cv2.imshow("a",imgCropBirthday)
     # birthday = pt.image_to_string(
@@ -319,7 +284,8 @@ def valid_front_side_identity(img_name):
         #           [imgContour,imgWarped])
         imageArray = ([imgContour, imgWarped])
         # cv2.imshow("ImageWarped", imgWarped)
-        imgCropImage = cropImageIdentifyImage(imgWarped)
+        print(type(imgWarped))
+        imgCropImage = processImage.cropImageIdentifyImage(imgWarped)
         # imgCrop = cv2.Canny(imgCrop, 10, 400)
         # cv2.imshow("ImageCroped", imgCropNameLineTwo)
         # cv2.imshow("ImageCropedOne", imgCropNameLineOne)
@@ -346,14 +312,17 @@ def valid_front_side_identity(img_name):
         # numberr = (number[0])[1]
         name = re.sub(r'['+chars+"‘"+']', '', name)
         # print(img_text)
-        print("+"+name+"+")
+        print("name",name)
         print("number", number)
         print("birthday", birthday)
         print(distance, result)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         return {
             "result": True,
             "number": number,
-            "birthday": birthday
+            "birthday": birthday,
+            "name": name
         }
     else:
         # imageArray = ([img, imgThres],
@@ -369,5 +338,4 @@ def valid_front_side_identity(img_name):
     # if cv2.waitKey(1) and 0xFF == ord('q'):
     #     break
 
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    

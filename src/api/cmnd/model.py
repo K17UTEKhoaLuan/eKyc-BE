@@ -1,4 +1,3 @@
-from app import frontside
 from pydantic import BaseModel
 
 class Identity(BaseModel):
@@ -7,5 +6,8 @@ class Identity(BaseModel):
     identityNumber: str
     address: str
     birthday: str
-    # frontside: str
-    # backside: str
+    frontside: str
+    backside: str
+
+class UploadVideo(BaseModel):
+    name: str

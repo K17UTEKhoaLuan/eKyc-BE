@@ -37,7 +37,7 @@ def cropIdentity(img, item):
 def cropImageIdentifyNumber(img):
     y = 115
     x = 405
-    h = 190
+    h = 160
     w = 700
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
@@ -45,7 +45,7 @@ def cropImageIdentifyNumber(img):
 
 
 def cropImageIdentifyNameLineOne(img):
-    y = 165
+    y = 175
     x = 360
     h = 249
     w = 840
@@ -55,7 +55,7 @@ def cropImageIdentifyNameLineOne(img):
 
 
 def cropImageIdentifyNameLineTwo(img):
-    y = 227
+    y = 235
     x = 228
     h = 290
     w = 850
@@ -65,9 +65,9 @@ def cropImageIdentifyNameLineTwo(img):
 
 
 def cropImageIdentifyBirthday(img):
-    y = 285
+    y = 260
     x = 400
-    h = 350
+    h = 320
     w = 840
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)

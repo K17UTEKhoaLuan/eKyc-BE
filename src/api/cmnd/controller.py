@@ -11,12 +11,16 @@ from .validation import validate_name, validate_birthday, validate_number_identi
 router = APIRouter()
 
 
-@router.get("/validation")
+@router.post("/validation")
 def validation(item: Identity):
     img_frontside = convert.convert_base64_to_image(item.frontside)
+    img_frontside = documentScanner.resize_and_pre(img_frontside )
     scaned_name = documentScanner.scan_name(img_frontside)
     scaned_identity_number = documentScanner.scan_identify_number(img_frontside)
     scaned_birthday = documentScanner.scan_birthday(img_frontside)
+    print("scaned_name",scaned_name)
+    print("scaned_identity_number",scaned_identity_number)
+    print("scaned_birthday",scaned_birthday)
     validate_name(item.name, scaned_name)
     validate_number_identity(item.identityNumber, scaned_identity_number)
     validate_birthday(item.birthday, scaned_birthday)

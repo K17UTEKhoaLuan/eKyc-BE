@@ -193,7 +193,7 @@ def split_string(pre_string):
     chars = re.escape(string.punctuation)
     
     pre_string=" ".join(pre_string.split())
-    print("pre_string",pre_string)
+    # print("pre_string",pre_string)
     list_string = re.split(r'['+chars+" |\n |\f |\x0c"+']', pre_string)
     while '' in list_string: list_string.remove('')
     print(list_string)
@@ -206,12 +206,15 @@ def scan_name(img):
     imgCropNameLineTwo = processImage.cropImageIdentifyNameLineTwo(img)
     # cv2.imshow("name", imgCropNameLineOne)
     # cv2.imshow("name1", imgCropNameLineTwo)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     # name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
     #     imgCropNameLineOne)) > 0) else reader.readtext(imgCropNameLineTwo)
     nameOne = pt.image_to_string(
         imgCropNameLineOne, lang='eng', config=tessdata_dir_config)
     nameTwo = pt.image_to_string(
         imgCropNameLineTwo, lang='eng', config=tessdata_dir_config)
+    print(nameOne)
     _, nameOne = split_string(nameOne)
     _, nameTwo = split_string(nameTwo)
     # print("++"+nameOne+"++")
@@ -226,10 +229,15 @@ def scan_name(img):
 
 def scan_identify_number(img):
     imgCropNumber = processImage.cropImageIdentifyNumber(img)
-    # number = reader.readtext(imgCropNumber)
+    # number = reader.readtext(imgCropNumber)# cv2.waitKey(0)
+    # imgCropNumber = cv2.threshold(src=imgCropNumber, thresh=0, maxval=255, type=cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
+    # cv2.imshow("sad",imgCropNumber)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+    
     number = pt.image_to_string(
         imgCropNumber, lang='eng',
-        config=tessdata_dir_config+' --psm 9 --oem 1 -c tessedit_char_whitelist=0123456789 ')
+        config=tessdata_dir_config+' --psm 10 --oem 1 -c tessedit_char_whitelist=0123456789 ')
     number, _ = split_string(number)
     # return a
     if(len(number) > 0):
@@ -245,16 +253,19 @@ def scan_birthday(img):
     imgCropBirthday = processImage.cropImageIdentifyBirthday(img)
     # birthday = reader.readtext(imgCropBirthday)
     # cv2.imshow("a",imgCropBirthday)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     # birthday = pt.image_to_string(
     #     imgCropBirthday, config=tessdata_dir_config)
     # thr = cv2.threshold(src=imgCropBirthday, thresh=0, maxval=255, type=cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
     # cv2.imshow("th", thr)
     birthday = pt.image_to_string(imgCropBirthday, lang='eng',
-                                  config=tessdata_dir_config+' --psm 9 --oem 1 -c tessedit_char_whitelist=0123456789-O0 ')
+                                  config=tessdata_dir_config+' --psm 10 --oem 3 -c tessedit_char_whitelist=0123456789-O0 ')
     chars = """!"\#\$%\&'\(\)\*\+,./:;<=>\?@\[\\\]\^_`\{\|\}\~"""
-    print(chars)
+    # print(chars)
+    # print("birthday",birthday)
     birthday = re.split(r'[|\n |\f |\x0c]', birthday)
-    print(birthday)
+    
     # birthday = birthday.split(" ")
     # print(birthday)
     # return birthday
@@ -268,6 +279,10 @@ def scan_birthday(img):
     else:
         return ""
 
+
+def resize_and_pre(img):
+    img = cv2.resize(img, (widthImg, heightImg))
+    return img
 
 def valid_front_side_identity(img_name):
     img = cv2.imread(img_name)

@@ -41,8 +41,8 @@ import re
 import dlib
 from src.api.face import compare_image
 from src.process import processImage
-tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
-# tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
+# tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
+tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
 # pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 ###################################
 widthImg = 856
@@ -279,6 +279,17 @@ def scan_birthday(img):
     else:
         return ""
 
+def scan_province(img):
+    img_croped = processImage.crop_image_province(img)
+    # cv2.imshow("crop", img_croped)
+    # cv2.imshow("aaa",img) 
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    province = pt.image_to_string(
+    img_croped, lang='eng', config=tessdata_dir_config)
+    _, province = split_string(province)
+    # print("province","+"+province+"+")
+    return province
 
 def resize_and_pre(img):
     img = cv2.resize(img, (widthImg, heightImg))

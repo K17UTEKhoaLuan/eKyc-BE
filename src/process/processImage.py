@@ -82,3 +82,12 @@ def cropImageIdentifyImage(img):
     crop = img[y:h, x:w]
     # crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
     return crop
+
+def crop_image_province(img):
+    y = 295
+    x =555
+    h = 332
+    w = 831
+    crop = img[y:h, x:w]
+    crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
+    return crop

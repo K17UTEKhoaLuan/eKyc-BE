@@ -1,0 +1,255 @@
+[
+    {
+        "code": "01",
+        "name": "TP Ha Noi"
+    },
+    {
+        "code":"02",
+        "name":"TP Ho Chi Minh"
+    },
+    {
+        "code":  "03",
+        "name": "TP Hai Phong"
+    },
+    {
+        "code": "04",
+        "name": "Dien Bien"
+    },
+    {
+        "code":  "04",
+        "name":     "Lai Chau"
+
+    },
+    {
+        "code":  "05",
+        "name": "Son La"
+    },
+    {
+        "code":  "06",
+        "name": "Lao Cai"
+    },
+    {
+        "code":  "06",
+        "name": "Yen Bai"
+    },
+    {
+        "code":  "07",
+        "name": "Ha Giang"
+    },
+    {
+        "code":  "07",
+        "name": "Tuyen Quang"
+    },
+    {
+        "code":  "08",
+        "name": "Lang Son"
+    },
+    {
+        "code":  ["091","092","093"],
+        "name": "Thai Nguyen" 
+    },
+    {
+        "code":  "095",
+        "name": "Bac Kan"
+    },
+    {
+        "code": "08",
+        "name":  "Cao Bang"
+    },
+    {
+        "code":  "10",
+        "name": "Quang Ninh"
+    },
+    {
+        "code":  "11",
+        "name": "Ha Tay"
+    },
+    {
+        "code":  "11",
+        "name": "Hoa Binh"
+    },
+    {
+        "code": "12",
+        "name": "Bac Giang" 
+    },
+    {
+        "code": "12",
+        "name": "Bac Ninh" 
+    },
+    {
+        "code":  "13",
+        "name":  "Phu Tho"
+    },
+    {
+        "code": "13",
+        "name":  "Vinh Phuc"
+    },
+    {
+        "code":  "14",
+        "name": "Hai Duong"
+    },
+    {
+        "code": "14",
+        "name": "Hung Yen"
+    },
+    {
+        "code":  "15",
+        "name": "Thai Binh"
+    },
+    {
+        "code":  "16",
+        "name":  "Nam Dinh"
+    },
+    {
+        "code": "16",
+        "name": "Ha Nam" 
+    },
+    {
+        "code":  "16",
+        "name": "Ninh Binh"
+    },
+    {
+        "code":  "17",
+        "name": "Thanh Hoa"
+    },
+    {
+        "code":  "18",
+        "name": "Nghe An"
+    },
+    {
+        "code":  "19",
+        "name": "Quang Binh"
+    },
+    {
+        "code":  "19",
+        "name": "Quang Tri"
+    },
+    {
+        "code":  "19",
+        "name": "Thua Thien Hue"
+    },
+    {
+        "code":  "20",
+        "name": "Quang Nam"
+    },
+    {
+        "code":  "20",
+        "name":  "TP Da Nang"
+    },
+    {
+        "code":  "21",
+        "name": "Quang Ngai"
+    },
+    {
+        "code":  "21",
+        "name": "Binh Dinh"
+    },
+    {
+        "code": "22",
+        "name": "Khanh Hoa"
+    },
+    {
+        "code":  "22",
+        "name": "Phu Yen"
+    },
+    {
+        "code":  ["230","231"],
+        "name": "Gia Lai"
+    },
+    {
+        "code":  "23",
+        "name": "Kom Tum"
+    },
+    {
+        "code": "24",
+        "name": "Dac Lac"
+    },
+    {
+        "code": "245",
+        "name": "Dac Nong"
+    },
+    {
+        "code": "25",
+        "name": "Lam Dong"
+    },
+    {
+        "code": "26",
+        "name": "Ninh Thuan"
+    },
+    {
+        "code": "26",
+        "name": "Binh Thuan"
+    },
+    {
+        "code": "27",
+        "name": "Dong Nai"
+    },
+    {
+        "code": "27",
+        "name": "Ba Ria - Vung Tau"
+    },
+    {
+        "code": ["280","281"],
+        "name": "Binh Duong"
+    },
+    {
+        "code": "285",
+        "name": "Binh Phuoc"
+    },
+    {
+        "code": "29",
+        "name": "Tay Ninh"
+    },
+    {
+        "code": "30",
+        "name": "Long An"
+    },
+    {
+        "code": "31",
+        "name": "Tien Giang"
+    },
+    {
+        "code": "32",
+        "name": "Ben Tre"
+    },
+    {
+        "code": "33",
+        "name": "Vinh Long"
+    },
+    {
+        "code": "33",
+        "name": "Tra Vinh"
+    },
+    {
+        "code": "34",
+        "name": "Dong Thap"
+    },
+    {
+        "code": "35",
+        "name": "An Giang"
+    },
+    {
+        "code": "36",
+        "name": "TP Can Tho"
+    },
+    {
+        "code": "36",
+        "name": "Hau Giang"
+    },
+    {
+        "code": "36",
+        "name": "Soc Trang"
+    },
+    {
+        "code": "37",
+        "name": "Kien Giang"
+    },
+    {
+        "code": "38",
+        "name": "Ca Mau"
+    },
+    {
+        "code": "38",
+        "name": "Bac Lieu"
+    }
+]

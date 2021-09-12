@@ -1,7 +1,7 @@
 from src.api.cmnd.documentScanner import scan_province
 from src.utils.error_handle import Exception_Handle
 import json
-
+import datetime
 
 def validate_name(input_name, identity_name):
     list_input_name = input_name.split(" ")
@@ -48,4 +48,13 @@ def validate_province_identity_number(scaned_number_identity, scaned_province):
     if not(result):
         raise Exception_Handle(
             code=406, message="not equal identity vs province")
+    return True
+
+def validate_release_date(scaned_release_date):
+    now = datetime.datetime.now()
+    year = now.year
+    if not(scaned_release_date.isnumeric()):
+        raise Exception_Handle(code=406, message="date is not number")
+    if (int(year)-int(scaned_release_date)) > 15:
+        raise Exception_Handle(code=406, message="identity expired")
     return True

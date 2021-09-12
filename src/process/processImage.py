@@ -1,3 +1,4 @@
+import re
 import cv2
 import PIL.Image
 widthImg = 856
@@ -33,6 +34,7 @@ def cropIdentity(img, item):
     crop = img[y:h, x:w]
     # cv2.imwrite("frontside/{}_frontside.jpg".format(size.name), crop)
     return crop
+
 
 def cropImageIdentifyNumber(img):
     y = 115
@@ -83,11 +85,22 @@ def cropImageIdentifyImage(img):
     # crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
     return crop
 
+
 def crop_image_province(img):
     y = 295
-    x =555
+    x = 555
     h = 332
     w = 831
+    crop = img[y:h, x:w]
+    crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
+    return crop
+
+
+def crop_image_release_date(img):
+    y = 255
+    x = 710
+    h = 295
+    w = 828
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
     return crop

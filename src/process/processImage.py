@@ -31,11 +31,12 @@ def cropIdentity(img, item):
           str(int(coordinate_up_left + item.identityWidth)))
     print("coordinate_left_up", str(coordinate_left_up)+"-->" +
           str(int(coordinate_left_up + item.identityHeight)))
-
+    print("img size", img.shape)
     y = int(coordinate_up_left)+70
     h = int(coordinate_up_left + item.identityWidth)-70
     x = int(coordinate_left_up)
     w = int(coordinate_left_up + item.identityHeight)
+    img = cv2.resize(img,(item.imageWidth ,item.imageHeight ))
     crop = img[y:h, x:w]
     # cv2.imwrite("frontside/{}_frontside.jpg".format(size.name), crop)
     return crop

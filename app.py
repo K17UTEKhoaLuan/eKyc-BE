@@ -81,4 +81,8 @@ app.include_router(image.router)
 async def MyCustomExceptionHandler(request: Request, exception: error_handle.Exception_Handle):
     return JSONResponse(
         status_code=exception.code,
-         content={"message": exception.message})
+         content={
+             "result": exception.result,
+             "field": exception.field,
+             "message": exception.message
+             })

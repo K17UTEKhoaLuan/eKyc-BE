@@ -1,3 +1,6 @@
+FROM ubuntu 20.04
+RUN apt-get update && apt-get -y install cmake protobuf-compiler
+
 FROM python:3.8
 
 COPY ./ /app

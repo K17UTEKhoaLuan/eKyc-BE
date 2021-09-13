@@ -83,6 +83,7 @@ async def MyCustomExceptionHandler(request: Request, exception: error_handle.Exc
         status_code=exception.code,
          content={
              "result": exception.result,
+             "step": exception.step,
              "field": exception.field,
              "message": exception.message
              })

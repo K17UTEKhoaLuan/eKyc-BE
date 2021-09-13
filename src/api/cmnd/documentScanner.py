@@ -283,8 +283,8 @@ def scan_province(img):
     img_croped = processImage.crop_image_province(img)
     # cv2.imshow("crop", img_croped)
     # cv2.imshow("aaa",img) 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     province = pt.image_to_string(
     img_croped, lang='eng', config=tessdata_dir_config)
     _, province = split_string(province)
@@ -295,8 +295,8 @@ def scan_release_date(img):
     img_croped = processImage.crop_image_release_date(img)
     # cv2.imshow("crop", img_croped)
     # cv2.imshow("aaa",img) 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     number = pt.image_to_string(
         img_croped, lang='eng',
         config=tessdata_dir_config+' --psm 10 --oem 3 -c tessedit_char_whitelist=0123456789 ')
@@ -355,8 +355,8 @@ def valid_front_side_identity(img_name):
         print("number", number)
         print("birthday", birthday)
         print(distance, result)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
         return {
             "result": True,
             "number": number,

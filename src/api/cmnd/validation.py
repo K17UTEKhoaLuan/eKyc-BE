@@ -45,13 +45,13 @@ def validate_province_identity_number(scaned_number_identity, scaned_province):
             print((cmnd[index])["name"])
             break
     if(index == len(cmnd)):
-        raise Exception_Handle(step=3, code=200, field="backside",
+        raise Exception_Handle(step=2, code=200, field="backside",
                                result=False, message="not found province in list")
     code_cmnd = (cmnd[index])["code"]
     result = (code_cmnd == scaned_number_identity[0:2]) if type(
         code_cmnd) is str else (scaned_number_identity[0:3] in set(code_cmnd))
     if not(result):
-        raise Exception_Handle(step=3,
+        raise Exception_Handle(step=2,
                                code=200, field="backside", result=False, message="not equal identity vs province")
     return True
 
@@ -60,9 +60,9 @@ def validate_release_date(scaned_release_date):
     now = datetime.datetime.now()
     year = now.year
     if not(scaned_release_date.isnumeric()):
-        raise Exception_Handle(step=3, code=200, field="backside",
+        raise Exception_Handle(step=2, code=200, field="backside",
                                result=False, message="date is not number")
     if (int(year)-int(scaned_release_date)) > 15:
-        raise Exception_Handle(step=3, code=200, field="backside",
+        raise Exception_Handle(step=2, code=200, field="backside",
                                result=False, message="identity expired")
     return True

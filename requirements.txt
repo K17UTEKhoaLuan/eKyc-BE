@@ -10,3 +10,4 @@ pytesseract
 opencv-python-headless
 scipy
 python-multipart
+easyocr

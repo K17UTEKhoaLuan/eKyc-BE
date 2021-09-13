@@ -27,8 +27,13 @@ def cropImageIdentifyNumber(img):
 def cropIdentity(img, item):
     coordinate_up_left = (item.imageWidth - item.identityWidth)/2
     coordinate_left_up = (item.imageHeight - item.identityHeight)/2
-    y = int(coordinate_up_left)+20
-    h = int(coordinate_up_left + item.identityWidth)-20
+    print("coordinate_up_left", coordinate_up_left+"-->" +
+          int(coordinate_up_left + item.identityWidth))
+    print("coordinate_left_up", coordinate_left_up+"-->" +
+          int(coordinate_left_up + item.identityHeight))
+
+    y = int(coordinate_up_left)+50
+    h = int(coordinate_up_left + item.identityWidth)-50
     x = int(coordinate_left_up)+20
     w = int(coordinate_left_up + item.identityHeight)-20
     crop = img[y:h, x:w]

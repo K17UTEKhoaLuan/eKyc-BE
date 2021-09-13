@@ -252,9 +252,9 @@ def scan_identify_number(img):
 def scan_birthday(img):
     imgCropBirthday = processImage.cropImageIdentifyBirthday(img)
     # birthday = reader.readtext(imgCropBirthday)
-    cv2.imshow("a",imgCropBirthday)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow("a",imgCropBirthday)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     # birthday = pt.image_to_string(
     #     imgCropBirthday, config=tessdata_dir_config)
     # thr = cv2.threshold(src=imgCropBirthday, thresh=0, maxval=255, type=cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]

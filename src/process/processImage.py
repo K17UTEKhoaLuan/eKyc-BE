@@ -40,9 +40,9 @@ def cropIdentity(img, item):
     img = cv2.resize(img,(item.imageHeight ,item.imageWidth ))
     crop = img[y:h, x:w]
     # cv2.imshow("aaa",img) 
-    cv2.imshow("crop", crop)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.imshow("crop", crop)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     # cv2.imwrite("frontside/{}_frontside.jpg".format(size.name), crop)
     return crop
 

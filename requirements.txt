@@ -6,7 +6,6 @@ fastapi
 dlib
 face_recognition
 pillow
-pytesseract
 opencv-python-headless
 scipy
 python-multipart

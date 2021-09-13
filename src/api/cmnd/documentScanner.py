@@ -194,7 +194,7 @@ def split_string(pre_string):
     
     pre_string=" ".join(pre_string.split())
     # print("pre_string",pre_string)
-    list_string = re.split(r'['+chars+" |\n |\f |\x0c"+']', pre_string)
+    list_string = re.split(r'['+chars+" |« |\n |\f |\x0c"+']', pre_string)
     while '' in list_string: list_string.remove('')
     print(list_string)
     # list_string.remove("")

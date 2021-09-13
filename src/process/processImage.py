@@ -40,9 +40,9 @@ def cropIdentity(img, item):
     img = cv2.resize(img,(item.imageHeight ,item.imageWidth ))
     crop = img[y:h, x:w]
     # cv2.imshow("aaa",img) 
-    # cv2.imshow("crop", crop)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.imshow("crop", crop)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
     # cv2.imwrite("frontside/{}_frontside.jpg".format(size.name), crop)
     return crop
 
@@ -50,7 +50,7 @@ def cropIdentity(img, item):
 def cropImageIdentifyNumber(img):
     y = 115
     x = 405
-    h = 160
+    h = 180
     w = 700
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
@@ -80,7 +80,7 @@ def cropImageIdentifyNameLineTwo(img):
 def cropImageIdentifyBirthday(img):
     y = 260
     x = 400
-    h = 320
+    h = 330
     w = 840
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)

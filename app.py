@@ -3,7 +3,7 @@ from fastapi.responses import  JSONResponse
 from src.api.cmnd import documentScanner, validation
 from pydantic import BaseModel
 import src.utils.error_handle as error_handle
-from src.api import cmnd, image
+from src.api import cmnd, image, face
 
 # UPLOAD_FOLDER = './cmnd'
 
@@ -75,6 +75,7 @@ def frontside(item: Frontside):
 
 app.include_router(cmnd.router)
 app.include_router(image.router)
+app.include_router(face.router)
 
 
 @app.exception_handler(error_handle.Exception_Handle)

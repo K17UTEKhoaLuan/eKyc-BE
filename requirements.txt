@@ -3,6 +3,7 @@ pydantic
 cmake
 opencv-python
 pytesseract
+mediapipe
 fastapi
 dlib
 face_recognition

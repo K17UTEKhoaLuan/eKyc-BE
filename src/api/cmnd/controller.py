@@ -3,6 +3,8 @@ from . import documentScanner
 from ...api.image import convert
 from .model import Identity
 from .validation import validate_name, validate_birthday, validate_number_identity, validate_province_identity_number, validate_release_date
+from src.process import processImage
+import cv2
 router = APIRouter()
 
 
@@ -22,11 +24,13 @@ def validation(item: Identity):
     print("scaned_name",scaned_name)
     print("scaned_identity_number",scaned_identity_number)
     print("scaned_birthday",scaned_birthday)
-    validate_name(item.name, scaned_name)
-    validate_number_identity(item.identityNumber, scaned_identity_number)
-    validate_birthday(item.birthday, scaned_birthday)
-    validate_province_identity_number(scaned_identity_number,scaned_province)
-    validate_release_date(scaned_release_date)
+    # validate_name(item.name, scaned_name)
+    # validate_number_identity(item.identityNumber, scaned_identity_number)
+    # validate_birthday(item.birthday, scaned_birthday)
+    # validate_province_identity_number(scaned_identity_number,scaned_province)
+    # validate_release_date(scaned_release_date)
+    face_img = processImage.cropImageIdentifyImage(img_frontside)
+    cv2.imwrite("savedata/face_from_identity/{}.jpg".format(item.identityNumber),face_img)
     return {
         "result": True,
         "message": "valid complete"

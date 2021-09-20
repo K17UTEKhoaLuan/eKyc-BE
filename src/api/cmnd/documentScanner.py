@@ -41,8 +41,8 @@ import re
 import dlib
 from src.api.face import compare_image
 from src.process import processImage
-tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
-# tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
+# tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
+tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
 # pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 ###################################
 widthImg = 856

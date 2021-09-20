@@ -29,8 +29,10 @@ async def valid_pose(identityNumber: str, file: UploadFile = File(...)):
 
     # cap.release()
     # cv2.destroyAllWindows()
-    valid_real_face.validate_gesture_face(
-        "savedata/video/{}.mp4".format(identityNumber), identityNumber)
+
+
+    # valid_real_face.validate_gesture_face(
+    #     "savedata/video/{}.mp4".format(identityNumber), identityNumber)
     os.remove("savedata/video/{}.mp4".format(identityNumber))
     completed,pose_id, pose = random_gesture.next_gesture(
         identityNumber)

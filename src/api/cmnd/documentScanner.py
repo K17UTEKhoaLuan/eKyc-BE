@@ -34,21 +34,20 @@ from shlex import split
 import cv2
 import numpy as np
 import string
-import easyocr
+# import easyocr
 # from PIL import Image
 import pytesseract as pt
 import re
 import dlib
 from src.api.face import compare_image
 from src.process import processImage
-# tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
-tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
+tessdata_dir_config = r'--tessdata-dir "/app/.apt/usr/share/tesseract-ocr/4.00/tessdata"'
+# tessdata_dir_config = r'--tessdata-dir "/usr/share/tesseract-ocr/4.00/tessdata"'
 # pt.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 ###################################
 widthImg = 856
 heightImg = 539
 #####################################
-reader = easyocr.Reader(['en'])
 
 # cap = cv2.VideoCapture(1)
 # cap.set(10, 150)
@@ -209,18 +208,17 @@ def scan_name(img):
     # cv2.imshow("name1", imgCropNameLineTwo)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
-        imgCropNameLineOne)) > 0) else reader.readtext(imgCropNameLineTwo)
-    # nameOne = pt.image_to_string(
-    #     imgCropNameLineOne, lang='eng', config=tessdata_dir_config)
-    # nameTwo = pt.image_to_string(
-    #     imgCropNameLineTwo, lang='eng', config=tessdata_dir_config)
-    # print(nameOne)
-    # _, nameOne = split_string(nameOne)
-    # _, nameTwo = split_string(nameTwo)
+    # name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
+    #     imgCropNameLineOne)) > 0) else reader.readtext(imgCropNameLineTwo)
+    nameOne = pt.image_to_string(
+        imgCropNameLineOne, lang='eng', config=tessdata_dir_config)
+    nameTwo = pt.image_to_string(
+        imgCropNameLineTwo, lang='eng', config=tessdata_dir_config)
+    print(nameOne)
+    _, nameOne = split_string(nameOne)
+    _, nameTwo = split_string(nameTwo)
     # print("++"+nameOne+"++")
     # print("++"+nameTwo+"++")
-    return name[0][1]
     return nameOne + nameTwo
     if(len(name) > 0):
         chars = re.escape(string.punctuation)
@@ -231,23 +229,21 @@ def scan_name(img):
 
 def scan_identify_number(img):
     imgCropNumber = processImage.cropImageIdentifyNumber(img)
-    number = reader.readtext(imgCropNumber)
-    # cv2.waitKey(0)
+    # number = reader.readtext(imgCropNumber)# cv2.waitKey(0)
     # imgCropNumber = cv2.threshold(src=imgCropNumber, thresh=0, maxval=255, type=cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
     # cv2.imshow("sad",imgCropNumber)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    print((number[0])[1])
-
-    # number = pt.image_to_string(
-    #     imgCropNumber, lang='eng',
-    #     config=tessdata_dir_config+' --psm 10 --oem 1 -c tessedit_char_whitelist=0123456789 ')
-    # number, _ = split_string(number)
+    
+    number = pt.image_to_string(
+        imgCropNumber, lang='eng',
+        config=tessdata_dir_config+' --psm 10 --oem 1 -c tessedit_char_whitelist=0123456789 ')
+    number, _ = split_string(number)
     # return a
     if(len(number) > 0):
         for num in number:
-            if (len(num[1]) == 9):
-                return num[1]
+            if (len(num) == 9):
+                return num
         return ""
     else:
         return ""
@@ -255,7 +251,7 @@ def scan_identify_number(img):
 
 def scan_birthday(img):
     imgCropBirthday = processImage.cropImageIdentifyBirthday(img)
-    birthday = reader.readtext(imgCropBirthday)
+    # birthday = reader.readtext(imgCropBirthday)
     # cv2.imshow("a",imgCropBirthday)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
@@ -263,22 +259,22 @@ def scan_birthday(img):
     #     imgCropBirthday, config=tessdata_dir_config)
     # thr = cv2.threshold(src=imgCropBirthday, thresh=0, maxval=255, type=cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
     # cv2.imshow("th", thr)
-    # birthday = pt.image_to_string(imgCropBirthday, lang='eng',
-    #                               config=tessdata_dir_config+' --psm 10 --oem 3 -c tessedit_char_whitelist=0123456789-O0 ')
-    # chars = """!"\#\$%\&'\(\)\*\+,./:;<=>\?@\[\\\]\^_`\{\|\}\~"""
-    # # print(chars)
+    birthday = pt.image_to_string(imgCropBirthday, lang='eng',
+                                  config=tessdata_dir_config+' --psm 10 --oem 3 -c tessedit_char_whitelist=0123456789-O0 ')
+    chars = """!"\#\$%\&'\(\)\*\+,./:;<=>\?@\[\\\]\^_`\{\|\}\~"""
+    # print(chars)
     print("birthday",birthday)
-    # birthday = re.split(r'[|\n |\f |\x0c]', birthday)
+    birthday = re.split(r'[|\n |\f |\x0c]', birthday)
     
     # birthday = birthday.split(" ")
     # print(birthday)
     # return birthday
     if(len(birthday) > 0):
         for sub_birth in birthday:
-            print(sub_birth[1])
-            day_month_year = sub_birth[1].split("-")
+            print(sub_birth)
+            day_month_year = sub_birth.split("-")
             if(len(day_month_year) == 3):
-                return sub_birth[1]
+                return sub_birth
         return ""
     else:
         return ""
@@ -289,12 +285,11 @@ def scan_province(img):
     # cv2.imshow("aaa",img) 
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    # province = pt.image_to_string(
-    # img_croped, lang='eng', config=tessdata_dir_config)
-    # _, province = split_string(province)
+    province = pt.image_to_string(
+    img_croped, lang='eng', config=tessdata_dir_config)
+    _, province = split_string(province)
     # print("province","+"+province+"+")
-    province = reader.readtext(img_croped)
-    return province[0][1]
+    return province
 
 def scan_release_date(img):
     img_croped = processImage.crop_image_release_date(img)
@@ -302,13 +297,12 @@ def scan_release_date(img):
     # cv2.imshow("aaa",img) 
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    # number = pt.image_to_string(
-    #     img_croped, lang='eng',
-    #     config=tessdata_dir_config+' --psm 10 --oem 3 -c tessedit_char_whitelist=0123456789 ')
-    # print("number","+"+number+"+")
-    # _,number = split_string(number)
-    number = reader.readtext(img_croped)
-    return number[0][1] if(len(number[0][1])==4) else ""
+    number = pt.image_to_string(
+        img_croped, lang='eng',
+        config=tessdata_dir_config+' --psm 10 --oem 3 -c tessedit_char_whitelist=0123456789 ')
+    print("number","+"+number+"+")
+    _,number = split_string(number)
+    return number if(len(number)==4) else ""
 
 def resize_and_pre(img):
     img = cv2.resize(img, (widthImg, heightImg))

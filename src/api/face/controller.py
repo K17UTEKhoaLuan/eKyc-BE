@@ -45,7 +45,7 @@ async def valid_pose(identityNumber: str, file: UploadFile = File(...)):
     }
 
 
-@router.get("/gesture", response_model=Gesture_Response)
+@router.post("/gesture", response_model=Gesture_Response)
 def get_random_gesture(identityNumber: str):
     pose_id, pose = random_gesture.random_face_gesture(identityNumber)
 

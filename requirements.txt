@@ -1,6 +1,6 @@
 uvicorn
 pydantic
-# cmake
+cmake
 opencv-python
 fastapi
 dlib
@@ -9,4 +9,3 @@ pillow
 opencv-python-headless
 scipy
 python-multipart
-easyocr

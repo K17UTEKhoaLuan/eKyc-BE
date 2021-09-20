@@ -2,6 +2,7 @@ uvicorn
 pydantic
 cmake
 opencv-python
+pytesseract
 fastapi
 dlib
 face_recognition

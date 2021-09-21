@@ -114,6 +114,7 @@ def validate_face_vs_identity(identity_number):
         print(result, distance)
 
     if not result:
+        os.remove("savedata/face_from_video/{}.mp4".format(identity_number))
         raise Exception_Handle(
             code=200,
             message="compare face fail",

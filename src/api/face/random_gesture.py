@@ -8,7 +8,7 @@ from src.utils.error_handle import Exception_Handle
 
 def add_id_to_list(saved_pose_data):
     list_id = []
-    for index in range(1, len(saved_pose_data)):
+    for index in range(1, len(saved_pose_data)-1):
         list_id.append(saved_pose_data[index]["id"])
     return list_id
 

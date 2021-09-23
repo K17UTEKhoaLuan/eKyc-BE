@@ -3,7 +3,7 @@
     "id": 0,
     "pose": "face_turn_left",
     "x": {
-      "min": 0.59,
+      "min": 0.57,
       "max": 1
     },
     "y": {
@@ -49,9 +49,9 @@
   },
   {
     "id": 4,
-    "pose": "fase_up_and_left",
+    "pose": "face_up_and_left",
     "x": {
-      "min": 0.59,
+      "min": 0.57,
       "max": 1
     },
     "y": {
@@ -75,7 +75,7 @@
     "id": 6,
     "pose": "face_down_left",
     "x": {
-      "min": 0.59,
+      "min": 0.57,
       "max": 1
     },
     "y": {

@@ -1,10 +1,10 @@
 import cv2
 import mediapipe as mp
-import time
+# import time
 from src.utils.error_handle import Exception_Handle
 from src.api.face import compare_image
 import json
-
+import os
 
 mpDraw = mp.solutions.drawing_utils
 mpPose = mp.solutions.pose
@@ -87,6 +87,7 @@ def validate_gesture_face(video_url, identityNumber):
 
     print("complete", complete)
     if not complete:
+        os.remove("savedata/video/{}.mp4".format(identityNumber))
         raise Exception_Handle(
             code=200,
             result=False,
@@ -113,6 +114,7 @@ def validate_face_vs_identity(identity_number):
         print(result, distance)
 
     if not result:
+        os.remove("savedata/face_from_video/{}.mp4".format(identity_number))
         raise Exception_Handle(
             code=200,
             message="compare face fail",

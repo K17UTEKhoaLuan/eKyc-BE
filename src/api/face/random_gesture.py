@@ -17,7 +17,7 @@ def random_face_gesture(identity_number):
     with open("data/pose.json") as pose_json:
         pose_data = json.load(pose_json)
         pose_json.close()
-    random_index = randint(0, len(pose_data))
+    random_index = randint(0, len(pose_data)-1)
     print("random_index", random_index)
     # save_json = [{"id": pose_data[random_index]["id"],"pose":pose_data[random_index]["pose"]}]
     save_json = []
@@ -52,7 +52,7 @@ def next_gesture(identity_number):
             print(list_pose_completed)
             random_index = randint(0, len(saved_pose_data))
             while random_index in list_pose_completed:
-                random_index = randint(0, len(saved_pose_data))
+                random_index = randint(0, len(saved_pose_data)-1)
 
             saved_pose_data.append(pose_data[random_index])
 

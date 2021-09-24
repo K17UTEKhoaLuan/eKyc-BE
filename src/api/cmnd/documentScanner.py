@@ -298,10 +298,10 @@ def scan_province(img):
 
 def scan_release_date(img):
     img_croped = processImage.crop_image_release_date(img)
-    # cv2.imshow("crop", img_croped)
-    # cv2.imshow("aaa",img) 
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    cv2.imshow("crop", img_croped)
+    cv2.imshow("aaa",img) 
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
     # number = pt.image_to_string(
     #     img_croped, lang='eng',
     #     config=tessdata_dir_config+' --psm 10 --oem 3 -c tessedit_char_whitelist=0123456789 ')

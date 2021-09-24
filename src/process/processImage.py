@@ -108,9 +108,9 @@ def crop_image_province(img):
 
 
 def crop_image_release_date(img):
-    y = 255
+    y = 225
     x = 710
-    h = 295
+    h = 271
     w = 828
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)

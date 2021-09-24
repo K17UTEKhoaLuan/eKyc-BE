@@ -4,11 +4,24 @@ from src.api.cmnd import documentScanner, validation
 from pydantic import BaseModel
 import src.utils.error_handle as error_handle
 from src.api import cmnd, image, face
-
+from fastapi.middleware.cors import CORSMiddleware
 # UPLOAD_FOLDER = './cmnd'
 
 
 app = FastAPI()
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://192.168.1.109:8000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 

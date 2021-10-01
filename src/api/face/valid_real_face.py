@@ -22,8 +22,8 @@ def validate_gesture(img, pose_json):
         for id, lm in enumerate(results.pose_landmarks.landmark):
             h, w, c = img.shape
             if id == 0:
-                print(lm.y, (pose_json["y"])["min"])
-                print(lm.x, (pose_json["x"])["max"])
+                print("x",lm.x )
+                print("y",lm.y)
             if id == 0 and (pose_json["x"])["min"] <= lm.x <= (pose_json["x"])["max"] and (pose_json["y"])["min"] <= lm.y <= (pose_json["y"])["max"]:
                 return True
     return False
@@ -88,7 +88,7 @@ def validate_gesture_face(video_url, identityNumber):
     print("complete", complete)
     if not complete:
         os.remove("savedata/video/{}.mp4".format(identityNumber))
-        raise Exception_Handle(
+        raise Exception_Handle(name=__name__,
             code=200,
             result=False,
             message="no face return",
@@ -115,7 +115,7 @@ def validate_face_vs_identity(identity_number):
 
     if not result:
         os.remove("savedata/face_from_video/{}.mp4".format(identity_number))
-        raise Exception_Handle(
+        raise Exception_Handle(name=__name__,
             code=200,
             message="compare face fail",
             result=False,

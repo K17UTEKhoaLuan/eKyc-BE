@@ -62,7 +62,7 @@ def next_gesture(identity_number):
             # completed = True if(times == len(saved_pose_data)-1) else False
             return False,pose_data[random_index]["id"], pose_data[random_index]["pose"]
         else:
-            raise Exception_Handle(
+            raise Exception_Handle(name=__name__,
                 code=200,
                 message="index exceeding times",
                 result=False,
@@ -70,7 +70,7 @@ def next_gesture(identity_number):
                 step=3
             )
     else:
-        raise Exception_Handle(
+        raise Exception_Handle(name=__name__,
             code=200,
             result=False,
             message="file json not found",

@@ -1,12 +1,14 @@
-class Success_Handle:
-    def __init__(self, result: str, code: int, message: str, data: dict):
-        self.result = result
-        self.code = code
-        self.messsage = message
-        self.data = data
-    def success_return(self):
-        return {
-            "result": self.result,
-            "message": self.messsage,
-            "data": self.data
-        }
+from src.utils.logging_handle import get_logger
+
+
+def success_return(result: bool, message: str, client: str, **kwargs):
+    logger = get_logger(__name__)
+    logger.info(client.host+":"+str(client.port) + ": " + message)
+    res = {
+        "result": result,
+        "message": message,
+    }
+    for key, value in kwargs.items():
+        res[key] = value
+    # print(res)
+    return res

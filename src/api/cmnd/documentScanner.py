@@ -294,12 +294,13 @@ def scan_province(img):
     # _, province = split_string(province)
     # print("province","+"+province+"+")
     province = reader.readtext(img_croped)
-    return province[0][1]
+    print(province)
+    return province
 
 def scan_release_date(img):
     img_croped = processImage.crop_image_release_date(img)
-    cv2.imshow("crop", img_croped)
-    cv2.imshow("aaa",img) 
+    # cv2.imshow("crop", img_croped)
+    # cv2.imshow("aaa",img) 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     # number = pt.image_to_string(
@@ -308,6 +309,7 @@ def scan_release_date(img):
     # print("number","+"+number+"+")
     # _,number = split_string(number)
     number = reader.readtext(img_croped)
+    print(number)
     return number[0][1] if(len(number[0][1])==4) else ""
 
 def resize_and_pre(img):

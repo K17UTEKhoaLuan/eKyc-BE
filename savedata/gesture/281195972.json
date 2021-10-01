@@ -1,1 +1,1 @@
-[{"times": 4}, {"id": 5, "pose": "face_up_and_right", "x": {"min": 0, "max": 0.41}, "y": {"min": 0, "max": 0.45}}]
+[{"times": 5}, {"id": 4, "pose": "face_up_and_left", "x": {"min": 0.57, "max": 1}, "y": {"min": 0, "max": 0.45}}]

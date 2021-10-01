@@ -50,7 +50,7 @@ def cropIdentity(img, item):
 def cropImageIdentifyNumber(img):
     y = 115
     x = 405
-    h = 180
+    h = 175
     w = 700
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
@@ -98,9 +98,9 @@ def cropImageIdentifyImage(img):
 
 
 def crop_image_province(img):
-    y = 295
+    y = 290
     x = 555
-    h = 332
+    h = 335
     w = 831
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
@@ -108,9 +108,9 @@ def crop_image_province(img):
 
 
 def crop_image_release_date(img):
-    y = 225
+    y = 245
     x = 710
-    h = 271
+    h = 295
     w = 828
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)

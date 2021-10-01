@@ -1,12 +1,13 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import  JSONResponse
+from fastapi.responses import JSONResponse
 from src.api.cmnd import documentScanner, validation
 from pydantic import BaseModel
-import src.utils.error_handle as error_handle
+from src.utils.error_handle import Exception_Handle
 from src.api import cmnd, image, face
 from fastapi.middleware.cors import CORSMiddleware
-# UPLOAD_FOLDER = './cmnd'
 
+from src.utils.logging_handle import get_logger
+# UPLOAD_FOLDER = './cmnd'
 
 app = FastAPI()
 origins = [
@@ -50,8 +51,12 @@ class Seen(BaseModel):
     name: str
 
 
+        
 @app.get('/')
 def home():
+    # print(__name__)
+    # local_logger = get_logger(__name__)
+    # local_logger.info(f'I am a local logger.')
     return "hello"
 
 
@@ -82,22 +87,20 @@ def frontside(item: Frontside):
     return result
 
 
-
-
-
-
 app.include_router(cmnd.router)
 app.include_router(image.router)
 app.include_router(face.router)
 
-
-@app.exception_handler(error_handle.Exception_Handle)
-async def MyCustomExceptionHandler(request: Request, exception: error_handle.Exception_Handle):
+@app.exception_handler(Exception_Handle)
+async def MyCustomExceptionHandler(request: Request, exception: Exception_Handle):
+    logger = get_logger(exception.name)
+    logger.error(request.client.host+":"+str(request.client.port)+": "+exception.message)
     return JSONResponse(
         status_code=exception.code,
-         content={
-             "result": exception.result,
-             "step": exception.step,
-             "field": exception.field,
-             "message": exception.message
-             })
+        content={
+            "result": exception.result,
+            "step": exception.step,
+            "field": exception.field,
+            "message": exception.message
+        })
+

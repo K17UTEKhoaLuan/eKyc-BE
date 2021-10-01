@@ -51,7 +51,6 @@ class Seen(BaseModel):
     name: str
 
 
-        
 @app.get('/')
 def home():
     # print(__name__)
@@ -91,10 +90,13 @@ app.include_router(cmnd.router)
 app.include_router(image.router)
 app.include_router(face.router)
 
+
 @app.exception_handler(Exception_Handle)
 async def MyCustomExceptionHandler(request: Request, exception: Exception_Handle):
     logger = get_logger(exception.name)
-    logger.error(request.client.host+":"+str(request.client.port)+": "+exception.message)
+    # logger.error(request.client.host+":"+str(request.client.port)+": "+exception.message)
+    logger.error("client => {}:{}: {}".format(
+        request.client.host, request.client.port, exception.message))
     return JSONResponse(
         status_code=exception.code,
         content={
@@ -103,4 +105,3 @@ async def MyCustomExceptionHandler(request: Request, exception: Exception_Handle
             "field": exception.field,
             "message": exception.message
         })
-

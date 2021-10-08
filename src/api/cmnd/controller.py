@@ -12,6 +12,7 @@ from .validation import (validate_name,
 from src.process import processImage
 import cv2
 from src.utils.success_handle import success_return
+from .middleware import check_value_scaned_is_none
 router = APIRouter()
 
 
@@ -21,12 +22,18 @@ def validation(item: Identity, request: Request):
     img_frontside = documentScanner.resize_and_pre(img_frontside)
     img_backside = convert.convert_base64_to_image(item.backside)
     img_backside = documentScanner.resize_and_pre(img_backside)
-    scaned_name = documentScanner.scan_name(img_frontside)
-    scaned_identity_number = documentScanner.scan_identify_number(
+    success, scaned_name = documentScanner.scan_name(img_frontside)
+    check_value_scaned_is_none(success)
+    success, scaned_identity_number = documentScanner.scan_identify_number(
         img_frontside)
-    scaned_birthday = documentScanner.scan_birthday(img_frontside)
-    scaned_province = documentScanner.scan_province(img_backside)
-    scaned_release_date = documentScanner.scan_release_date(img_backside)
+    check_value_scaned_is_none(success)
+    success, scaned_birthday = documentScanner.scan_birthday(img_frontside)
+    check_value_scaned_is_none(success)
+    success, scaned_province = documentScanner.scan_province(img_backside)
+    check_value_scaned_is_none(success)
+    success, scaned_release_date = documentScanner.scan_release_date(
+        img_backside)
+    check_value_scaned_is_none(success)
     print("scaned_release_date", scaned_release_date)
     print("scaned_province", scaned_province)
     print("scaned_name", scaned_name)

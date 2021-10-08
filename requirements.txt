@@ -4,6 +4,7 @@ cmake
 opencv-python
 pytesseract
 mediapipe
+easyocr
 fastapi
 dlib
 face_recognition

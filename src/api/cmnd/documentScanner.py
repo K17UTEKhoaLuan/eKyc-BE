@@ -154,9 +154,6 @@ def stackImages(scale, imgArray):
     return ver
 
 
-
-
-
 def detectFace(img):
     detector = dlib.get_frontal_face_detector()
     predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
@@ -192,11 +189,12 @@ def detectFace(img):
 
 def split_string(pre_string):
     chars = re.escape(string.punctuation)
-    
-    pre_string=" ".join(pre_string.split())
+
+    pre_string = " ".join(pre_string.split())
     # print("pre_string",pre_string)
     list_string = re.split(r'['+chars+" |« |\n |\f |\x0c"+']', pre_string)
-    while '' in list_string: list_string.remove('')
+    while '' in list_string:
+        list_string.remove('')
     print(list_string)
     # list_string.remove("")
     return list_string, " ".join(list_string).strip()
@@ -220,7 +218,7 @@ def scan_name(img):
     # _, nameTwo = split_string(nameTwo)
     # print("++"+nameOne+"++")
     # print("++"+nameTwo+"++")
-    return name[0][1]
+    return True, name[0][1] if name else False, None
     return nameOne + nameTwo
     if(len(name) > 0):
         chars = re.escape(string.punctuation)
@@ -237,20 +235,19 @@ def scan_identify_number(img):
     # cv2.imshow("sad",imgCropNumber)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    print((number[0])[1])
+    print((number[0])[1] if number else "")
 
     # number = pt.image_to_string(
     #     imgCropNumber, lang='eng',
     #     config=tessdata_dir_config+' --psm 10 --oem 1 -c tessedit_char_whitelist=0123456789 ')
     # number, _ = split_string(number)
     # return a
-    if(len(number) > 0):
-        for num in number:
-            if (len(num[1]) == 9):
-                return num[1]
-        return ""
-    else:
-        return ""
+    if(len(number) == 0):
+        return False, None
+    for num in number:
+        if (len(num[1]) == 9):
+            return True, num[1]
+    return False, None
 
 
 def scan_birthday(img):
@@ -267,26 +264,26 @@ def scan_birthday(img):
     #                               config=tessdata_dir_config+' --psm 10 --oem 3 -c tessedit_char_whitelist=0123456789-O0 ')
     # chars = """!"\#\$%\&'\(\)\*\+,./:;<=>\?@\[\\\]\^_`\{\|\}\~"""
     # # print(chars)
-    print("birthday",birthday)
+    print("birthday", birthday)
     # birthday = re.split(r'[|\n |\f |\x0c]', birthday)
-    
+
     # birthday = birthday.split(" ")
     # print(birthday)
     # return birthday
-    if(len(birthday) > 0):
-        for sub_birth in birthday:
-            print(sub_birth[1])
-            day_month_year = sub_birth[1].split("-")
-            if(len(day_month_year) == 3):
-                return sub_birth[1]
-        return ""
-    else:
-        return ""
+    if(len(birthday) == 0):
+        return False, None
+    for sub_birth in birthday:
+        print(sub_birth[1])
+        day_month_year = sub_birth[1].split("-")
+        if(len(day_month_year) == 3):
+            return True, sub_birth[1]
+    return False, None
+
 
 def scan_province(img):
     img_croped = processImage.crop_image_province(img)
     # cv2.imshow("crop", img_croped)
-    # cv2.imshow("aaa",img) 
+    # cv2.imshow("aaa",img)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
     # province = pt.image_to_string(
@@ -295,12 +292,13 @@ def scan_province(img):
     # print("province","+"+province+"+")
     province = reader.readtext(img_croped)
     print(province)
-    return province
+    return True, province if (province) else False, None
+
 
 def scan_release_date(img):
     img_croped = processImage.crop_image_release_date(img)
     # cv2.imshow("crop", img_croped)
-    # cv2.imshow("aaa",img) 
+    # cv2.imshow("aaa",img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     # number = pt.image_to_string(
@@ -310,11 +308,13 @@ def scan_release_date(img):
     # _,number = split_string(number)
     number = reader.readtext(img_croped)
     print(number)
-    return number[0][1] if(len(number[0][1])==4) else ""
+    return True,number[0][1] if(number and len(number[0][1]) == 4) else False, None
+
 
 def resize_and_pre(img):
     img = cv2.resize(img, (widthImg, heightImg))
     return img
+
 
 def valid_front_side_identity(img_name):
     img = cv2.imread(img_name)
@@ -351,7 +351,7 @@ def valid_front_side_identity(img_name):
         birthday = scan_birthday(imgWarped)
         name = scan_name(imgWarped)
         #######################################################
-        #imgCropNameLineOne = cropImageIdentifyNameLineOne(imgWarped)
+        # imgCropNameLineOne = cropImageIdentifyNameLineOne(imgWarped)
 
         chars = re.escape(string.punctuation)
         # print(chars)
@@ -359,7 +359,7 @@ def valid_front_side_identity(img_name):
         # numberr = (number[0])[1]
         name = re.sub(r'['+chars+"‘"+']', '', name)
         # print(img_text)
-        print("name",name)
+        print("name", name)
         print("number", number)
         print("birthday", birthday)
         print(distance, result)
@@ -384,5 +384,3 @@ def valid_front_side_identity(img_name):
 
     # if cv2.waitKey(1) and 0xFF == ord('q'):
     #     break
-
-    

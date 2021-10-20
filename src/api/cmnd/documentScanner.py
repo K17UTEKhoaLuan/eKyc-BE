@@ -207,8 +207,13 @@ def scan_name(img):
     # cv2.imshow("name1", imgCropNameLineTwo)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
-    name = reader.readtext(imgCropNameLineOne) if(len(reader.readtext(
-        imgCropNameLineOne)) > 0) else reader.readtext(imgCropNameLineTwo)
+    name1 = reader.readtext(imgCropNameLineOne) 
+    name2 = reader.readtext(imgCropNameLineTwo)
+    name = ""
+    for string_name in name1:
+        name += string_name[1]+" "
+    for string_name in name2:
+        name += string_name[1]+" "
     # nameOne = pt.image_to_string(
     #     imgCropNameLineOne, lang='eng', config=tessdata_dir_config)
     # nameTwo = pt.image_to_string(
@@ -218,7 +223,10 @@ def scan_name(img):
     # _, nameTwo = split_string(nameTwo)
     # print("++"+nameOne+"++")
     # print("++"+nameTwo+"++")
-    return True, name[0][1] if name else False, None
+    success = True if len(name) else False
+    res_name = name if len(name) else None
+    print("res_name", res_name)
+    return success, res_name
     return nameOne + nameTwo
     if(len(name) > 0):
         chars = re.escape(string.punctuation)
@@ -229,7 +237,7 @@ def scan_name(img):
 
 def scan_identify_number(img):
     imgCropNumber = processImage.cropImageIdentifyNumber(img)
-    number = reader.readtext(imgCropNumber)
+    number = reader.readtext(imgCropNumber,allowlist = '0123456789')
     # cv2.waitKey(0)
     # imgCropNumber = cv2.threshold(src=imgCropNumber, thresh=0, maxval=255, type=cv2.THRESH_OTSU + cv2.THRESH_BINARY_INV)[1]
     # cv2.imshow("sad",imgCropNumber)
@@ -242,17 +250,19 @@ def scan_identify_number(img):
     #     config=tessdata_dir_config+' --psm 10 --oem 1 -c tessedit_char_whitelist=0123456789 ')
     # number, _ = split_string(number)
     # return a
-    if(len(number) == 0):
-        return False, None
-    for num in number:
-        if (len(num[1]) == 9):
-            return True, num[1]
-    return False, None
+    res_number = None
+    success = False
+    if(len(number) > 0):
+        for num in number:
+            if (len(num[1]) == 9):
+                res_number = num[1]
+                success = True
+    return success, res_number
 
 
 def scan_birthday(img):
     imgCropBirthday = processImage.cropImageIdentifyBirthday(img)
-    birthday = reader.readtext(imgCropBirthday)
+    birthday = reader.readtext(imgCropBirthday,allowlist = '0123456789-')
     # cv2.imshow("a",imgCropBirthday)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
@@ -270,14 +280,16 @@ def scan_birthday(img):
     # birthday = birthday.split(" ")
     # print(birthday)
     # return birthday
-    if(len(birthday) == 0):
-        return False, None
-    for sub_birth in birthday:
-        print(sub_birth[1])
-        day_month_year = sub_birth[1].split("-")
-        if(len(day_month_year) == 3):
-            return True, sub_birth[1]
-    return False, None
+    res_birthday = None
+    success = False
+    if(len(birthday) > 0):
+        for sub_birth in birthday:
+            print(sub_birth[1])
+            day_month_year = sub_birth[1].split("-")
+            if(len(day_month_year) == 3):
+                res_birthday= sub_birth[1]
+                success = True
+    return success, res_birthday
 
 
 def scan_province(img):
@@ -292,23 +304,27 @@ def scan_province(img):
     # print("province","+"+province+"+")
     province = reader.readtext(img_croped)
     print(province)
-    return True, province if (province) else False, None
+    success = True if(province)else False
+    res_province = province if(province) else None
+    return success,res_province
 
 
 def scan_release_date(img):
     img_croped = processImage.crop_image_release_date(img)
     # cv2.imshow("crop", img_croped)
     # cv2.imshow("aaa",img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
     # number = pt.image_to_string(
     #     img_croped, lang='eng',
     #     config=tessdata_dir_config+' --psm 10 --oem 3 -c tessedit_char_whitelist=0123456789 ')
     # print("number","+"+number+"+")
     # _,number = split_string(number)
-    number = reader.readtext(img_croped)
+    number = reader.readtext(img_croped,allowlist = '0123456789')
     print(number)
-    return True,number[0][1] if(number and len(number[0][1]) == 4) else False, None
+    success = True if(number and len(number[0][1]) == 4) else False
+    res_number = number[0][1]  if(number and len(number[0][1]) == 4) else None
+    return success, res_number
 
 
 def resize_and_pre(img):

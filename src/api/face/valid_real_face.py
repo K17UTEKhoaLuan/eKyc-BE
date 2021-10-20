@@ -87,7 +87,7 @@ def validate_gesture_face(video_url, identityNumber):
 
     print("complete", complete)
     if not complete:
-        os.remove("savedata/video/{}.mp4".format(identityNumber))
+        # os.remove("savedata/video/{}.mp4".format(identityNumber))
         raise Exception_Handle(name=__name__,
             code=200,
             result=False,
@@ -114,7 +114,7 @@ def validate_face_vs_identity(identity_number):
         print(result, distance)
 
     if not result:
-        os.remove("savedata/face_from_video/{}.mp4".format(identity_number))
+        # os.remove("savedata/face_from_video/{}.mp4".format(identity_number))
         raise Exception_Handle(name=__name__,
             code=200,
             message="compare face fail",

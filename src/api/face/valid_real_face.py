@@ -87,7 +87,7 @@ def validate_gesture_face(video_url, identityNumber):
 
     print("complete", complete)
     if not complete:
-        # os.remove("savedata/video/{}.mp4".format(identityNumber))
+        os.remove("savedata/video/{}.mp4".format(identityNumber))
         raise Exception_Handle(name=__name__,
             code=200,
             result=False,

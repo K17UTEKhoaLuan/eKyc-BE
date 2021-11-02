@@ -34,7 +34,7 @@ async def valid_pose(identityNumber: str, request: Request, file: UploadFile = F
 
     valid_real_face.validate_gesture_face(
         "savedata/video/{}.mp4".format(identityNumber), identityNumber)
-    # os.remove("savedata/video/{}.mp4".format(identityNumber))
+    os.remove("savedata/video/{}.mp4".format(identityNumber))
     completed, pose_id, pose = random_gesture.next_gesture(
         identityNumber)
     return success_return(
@@ -80,7 +80,7 @@ async def compare_face(identityNumber: str, request: Request, file: UploadFile =
         image.write(contents)
         image.close()
     valid_real_face.validate_face_vs_identity(identityNumber)
-    # os.remove("savedata/face_from_video/{}.mp4".format(identityNumber))
+    os.remove("savedata/face_from_video/{}.mp4".format(identityNumber))
     return success_return(
         result=True,
         message="compare face success",

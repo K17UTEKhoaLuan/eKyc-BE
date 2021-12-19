@@ -1,0 +1,316 @@
+[{
+        "name": "Thành phố Hà Nội",
+        "code": 1,
+        "cccdCode": "001"
+    },
+    {
+        "name": "Tỉnh Hà Giang",
+        "code": 2,
+        "cccdCode": "002"
+    },
+    {
+        "name": "Tỉnh Cao Bằng",
+        "code": 4,
+        "cccdCode": "003"
+    },
+    {
+        "name": "Tỉnh Bắc Kạn",
+        "code": 6,
+        "cccdCode": "006"
+    },
+    {
+        "name": "Tỉnh Tuyên Quang",
+        "code": 8,
+        "cccdCode": "008"
+    },
+    {
+        "name": "Tỉnh Lào Cai",
+        "code": 10,
+        "cccdCode": "010"
+    },
+    {
+        "name": "Tỉnh Điện Biên",
+        "code": 11,
+        "cccdCode": "011"
+    },
+    {
+        "name": "Tỉnh Lai Châu",
+        "code": 12,
+        "cccdCode": "012"
+    },
+    {
+        "name": "Tỉnh Sơn La",
+        "code": 14,
+        "cccdCode": "014"
+    },
+    {
+        "name": "Tỉnh Yên Bái",
+        "code": 15,
+        "cccdCode": "015"
+    },
+    {
+        "name": "Tỉnh Hoà Bình",
+        "code": 17,
+        "cccdCode": "017"
+    },
+    {
+        "name": "Tỉnh Thái Nguyên",
+        "code": 19,
+        "cccdCode": "019"
+    },
+    {
+        "name": "Tỉnh Lạng Sơn",
+        "code": 20,
+        "cccdCode": "020"
+    },
+    {
+        "name": "Tỉnh Quảng Ninh",
+        "code": 22,
+        "cccdCode": "022"
+    },
+    {
+        "name": "Tỉnh Bắc Giang",
+        "code": 24,
+        "cccdCode": "024"
+    },
+    {
+        "name": "Tỉnh Phú Thọ",
+        "code": 25,
+        "cccdCode": "025"
+    },
+    {
+        "name": "Tỉnh Vĩnh Phúc",
+        "code": 26,
+        "cccdCode": "026"
+    },
+    {
+        "name": "Tỉnh Bắc Ninh",
+        "code": 27,
+        "cccdCode": "027"
+    },
+    {
+        "name": "Tỉnh Hải Dương",
+        "code": 30,
+        "cccdCode": "030"
+    },
+    {
+        "name": "Thành phố Hải Phòng",
+        "code": 31,
+        "cccdCode": "031"
+    },
+    {
+        "name": "Tỉnh Hưng Yên",
+        "code": 33,
+        "cccdCode": "033"
+    },
+    {
+        "name": "Tỉnh Thái Bình",
+        "code": 34,
+        "cccdCode": "034"
+    },
+    {
+        "name": "Tỉnh Hà Nam",
+        "code": 35,
+        "cccdCode": "035"
+    },
+    {
+        "name": "Tỉnh Nam Định",
+        "code": 36,
+        "cccdCode": "036"
+    },
+    {
+        "name": "Tỉnh Ninh Bình",
+        "code": 37,
+        "cccdCode": "037"
+    },
+    {
+        "name": "Tỉnh Thanh Hóa",
+        "code": 38,
+        "cccdCode": "038"
+    },
+    {
+        "name": "Tỉnh Nghệ An",
+        "code": 40,
+        "cccdCode": "040"
+    },
+    {
+        "name": "Tỉnh Hà Tĩnh",
+        "code": 42,
+        "cccdCode": "042"
+    },
+    {
+        "name": "Tỉnh Quảng Bình",
+        "code": 44,
+        "cccdCode": "044"
+    },
+    {
+        "name": "Tỉnh Quảng Trị",
+        "code": 45,
+        "cccdCode": "045"
+    },
+    {
+        "name": "Tỉnh Thừa Thiên Huế",
+        "code": 46,
+        "cccdCode": "046"
+    },
+    {
+        "name": "Thành phố Đà Nẵng",
+        "code": 48,
+        "cccdCode": "048"
+    },
+    {
+        "name": "Tỉnh Quảng Nam",
+        "code": 49,
+        "cccdCode": "049"
+    },
+    {
+        "name": "Tỉnh Quảng Ngãi",
+        "code": 51,
+        "cccdCode": "051"
+    },
+    {
+        "name": "Tỉnh Bình Định",
+        "code": 52,
+        "cccdCode": "052"
+    },
+    {
+        "name": "Tỉnh Phú Yên",
+        "code": 54,
+        "cccdCode": "054"
+    },
+    {
+        "name": "Tỉnh Khánh Hòa",
+        "code": 56,
+        "cccdCode": "056"
+    },
+    {
+        "name": "Tỉnh Ninh Thuận",
+        "code": 58,
+        "cccdCode": "058"
+    },
+    {
+        "name": "Tỉnh Bình Thuận",
+        "code": 60,
+        "cccdCode": "060"
+    },
+    {
+        "name": "Tỉnh Kon Tum",
+        "code": 62,
+        "cccdCode": "062"
+    },
+    {
+        "name": "Tỉnh Gia Lai",
+        "code": 64,
+        "cccdCode": "064"
+    },
+    {
+        "name": "Tỉnh Đắk Lắk",
+        "code": 66,
+        "cccdCode": "066"
+    },
+    {
+        "name": "Tỉnh Đắk Nông",
+        "code": 67,
+        "cccdCode": "067"
+    },
+    {
+        "name": "Tỉnh Lâm Đồng",
+        "code": 68,
+        "cccdCode": "068"
+    },
+    {
+        "name": "Tỉnh Bình Phước",
+        "code": 70,
+        "cccdCode": "070"
+    },
+    {
+        "name": "Tỉnh Tây Ninh",
+        "code": 72,
+        "cccdCode": "072"
+    },
+    {
+        "name": "Tỉnh Bình Dương",
+        "code": 74,
+        "cccdCode": "074"
+    },
+    {
+        "name": "Tỉnh Đồng Nai",
+        "code": 75,
+        "cccdCode": "075"
+    },
+    {
+        "name": "Tỉnh Bà Rịa - Vũng Tàu",
+        "code": 77,
+        "cccdCode": "077"
+    },
+    {
+        "name": "Thành phố Hồ Chí Minh",
+        "code": 79,
+        "cccdCode": "079"
+    },
+    {
+        "name": "Tỉnh Long An",
+        "code": 80,
+        "cccdCode": "080"
+    },
+    {
+        "name": "Tỉnh Tiền Giang",
+        "code": 82,
+        "cccdCode": "082"
+    },
+    {
+        "name": "Tỉnh Bến Tre",
+        "code": 83,
+        "cccdCode": "083"
+    },
+    {
+        "name": "Tỉnh Trà Vinh",
+        "code": 84,
+        "cccdCode": "084"
+    },
+    {
+        "name": "Tỉnh Vĩnh Long",
+        "code": 86,
+        "cccdCode": "086"
+    },
+    {
+        "name": "Tỉnh Đồng Tháp",
+        "code": 87,
+        "cccdCode": "087"
+    },
+    {
+        "name": "Tỉnh An Giang",
+        "code": 89,
+        "cccdCode": "089"
+    },
+    {
+        "name": "Tỉnh Kiên Giang",
+        "code": 91,
+        "cccdCode": "091"
+    },
+    {
+        "name": "Thành phố Cần Thơ",
+        "code": 92,
+        "cccdCode": "092"
+    },
+    {
+        "name": "Tỉnh Hậu Giang",
+        "code": 93,
+        "cccdCode": "093"
+    },
+    {
+        "name": "Tỉnh Sóc Trăng",
+        "code": 94,
+        "cccdCode": "094"
+    },
+    {
+        "name": "Tỉnh Bạc Liêu",
+        "code": 95,
+        "cccdCode": "095"
+    },
+    {
+        "name": "Tỉnh Cà Mau",
+        "code": 96,
+        "cccdCode": "096"
+    }
+]

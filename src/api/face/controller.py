@@ -86,6 +86,6 @@ async def compare_face(identityNumber: str, request: Request, file: UploadFile =
         message="compare face success",
         client=request.client
     )
-    return{
-        "result": True,
-    }
+    # return{
+    #    "result": True,
+    # }

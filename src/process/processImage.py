@@ -115,3 +115,17 @@ def crop_image_release_date(img):
     crop = img[y:h, x:w]
     crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
     return crop
+
+
+def resize_and_pre(img):
+    img = cv2.resize(img, (widthImg, heightImg))
+    return img
+
+def cropImageCCCDImage(img):
+    y = 160
+    x = 0
+    h = 580
+    w = 280
+    crop = img[y:h, x:w]
+    # crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
+    return crop

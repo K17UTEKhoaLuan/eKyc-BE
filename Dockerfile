@@ -1,7 +1,7 @@
 FROM python:3.8
 RUN apt-get -y update
 RUN apt-get install -y build-essential cmake libgtk-3-dev libboost-all-dev pkg-config 
-
+RUN apt-get install zbar-tools
 
 COPY ./ /
 COPY ./requirements.txt  /

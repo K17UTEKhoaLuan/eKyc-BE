@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from src.api.cmnd import documentScanner, validation
 from pydantic import BaseModel
 from src.utils.error_handle import Exception_Handle
-from src.api import cmnd, image, face
+from src.api import cmnd, image, face, cccd, location
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.utils.logging_handle import get_logger
@@ -89,6 +89,8 @@ def frontside(item: Frontside):
 app.include_router(cmnd.router)
 app.include_router(image.router)
 app.include_router(face.router)
+app.include_router(cccd.router)
+app.include_router(location.router)
 
 
 @app.exception_handler(Exception_Handle)

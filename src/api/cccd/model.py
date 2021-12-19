@@ -9,6 +9,3 @@ class Identity(BaseModel):
     backside: str
     code: int
     sex: str
-
-class UploadVideo(BaseModel):
-    name: str

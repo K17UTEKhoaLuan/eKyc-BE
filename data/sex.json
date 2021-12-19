@@ -1,0 +1,61 @@
+[{
+        "id": 0,
+        "sex": "Male",
+        "fromDate": 1900,
+        "endDate": 1999
+    },
+    {
+        "id": 2,
+        "sex": "Male",
+        "fromDate": 2000,
+        "endDate": 2099
+    },
+    {
+        "id": 4,
+        "sex": "Male",
+        "fromDate": 2100,
+        "endDate": 2199
+    },
+    {
+        "id": 6,
+        "sex": "Male",
+        "fromDate": 2200,
+        "endDate": 2299
+    },
+    {
+        "id": 8,
+        "sex": "Male",
+        "fromDate": 2300,
+        "endDate": 2399
+    },
+    {
+        "id": 1,
+        "sex": "Female",
+        "fromDate": 1900,
+        "endDate": 1999
+    },
+    {
+        "id": 3,
+        "sex": "Female",
+        "fromDate": 2000,
+        "endDate": 2099
+    },
+    {
+        "id": 5,
+        "sex": "Female",
+        "fromDate": 2100,
+        "endDate": 2199
+    },
+    {
+        "id": 7,
+        "sex": "Female",
+        "fromDate": 2200,
+        "endDate": 2299
+    },
+    {
+        "id": 9,
+        "sex": "Female",
+        "fromDate": 2300,
+        "endDate": 2399
+    }
+]

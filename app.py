@@ -53,37 +53,8 @@ class Seen(BaseModel):
 
 @app.get('/')
 def home():
-    # print(__name__)
-    # local_logger = get_logger(__name__)
-    # local_logger.info(f'I am a local logger.')
     return "hello"
 
-
-# @app.route('/upload', methods=['GET', 'POST'])
-# def upload_file():
-#     if request.method == 'POST':
-#         if 'file1' not in request.files:
-#             return 'there is no file1 in form!'
-#         file1 = request.files['file1']
-#         path = os.path.join(app.config['UPLOAD_FOLDER'], "a.jpg")
-#         file1.save(path)
-#         return path
-
-
-@app.post("/frontside")
-def frontside(item: Frontside):
-    # data = request.json
-    # convert.convert_base64_to_image(item, "frontside")
-    path_name = "frontside/{}_frontside.jpg".format(item.name)
-    # processImage.cropIdentity(path_name, item)
-    print(path_name)
-    result = documentScanner.valid_front_side_identity(
-        path_name)
-    # base64_string=convert.convert_image_to_base64(path_name)
-    # result["base64String"] =base64_string
-    boool = validation.validate_name(item.name, result["name"])
-    print(boool)
-    return result
 
 
 app.include_router(cmnd.router)

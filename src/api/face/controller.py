@@ -9,28 +9,12 @@ router = APIRouter()
 
 @router.post("/checkgesture")
 async def valid_pose(identityNumber: str, request: Request, file: UploadFile = File(...)):
-    # file_name =""
-    # file_name+=file.filename
     contents = file.file.read()
     print(type(contents))
     with open("savedata/video/{}.mp4".format(identityNumber), 'wb') as image:
         image.write(contents)
         image.close()
-    #     # shutil.copyfileobj(file.file,"a.mp4")
-        # nparr = np.fromstring(contents, np.uint8)
-        # img_np = cv2.imdecode(nparr, flags=cv2.IMREAD_COLOR)
-    #     decoded = cv2.imdecode(np.frombuffer(contents, np.uint8), -1)
-        # print(img_np)
-    #     print('OpenCV:\n', img_np)
-    # cap  = cv2.VideoCapture("20210130_175032.mp4")
-    # while(cap.isOpened()):
-    #     ret, frame = cap.read()
-    #     cv2.imshow('frame',frame)
-    #     if cv2.waitKey(1) & 0xFF == ord('q'):
-    #         break
-
-    # cap.release()
-    # cv2.destroyAllWindows()
+    
 
     valid_real_face.validate_gesture_face(
         "savedata/video/{}.mp4".format(identityNumber), identityNumber)
@@ -50,15 +34,7 @@ async def valid_pose(identityNumber: str, request: Request, file: UploadFile = F
         message="check pose complete",
         complete=completed,
     )
-    return {
-        "result": True,
-        "pose_id": pose_id,
-        "pose": pose,
-        "complete": completed
-    } if not(completed) else {
-        "result": True,
-        "complete": completed
-    }
+   
 
 
 @router.post("/gesture", response_model=Gesture_Response)
@@ -86,6 +62,4 @@ async def compare_face(identityNumber: str, request: Request, file: UploadFile =
         message="compare face success",
         client=request.client
     )
-    # return{
-    #    "result": True,
-    # }
+    

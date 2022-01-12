@@ -6,10 +6,11 @@ from datetime import datetime
 def validate_release_date(birthdate):
     current_date = datetime.now().date()
     release_years = [200, 60, 40, 25]
-    birthdate = datetime.fromisoformat(birthdate).date()
-    for year in release_years:
+    [day, month, year] = birthdate.split("-")
+    birthdate = datetime.fromisoformat("{}-{}-{}".format(year,month,day)).date()
+    for item in release_years:
         release_date = birthdate.replace(
-            year=birthdate.year+year)
+            year=birthdate.year+item)
         if current_date > release_date:
             raise Exception_Handle(name=__name__, step=2,
                                    code=200,
@@ -27,7 +28,7 @@ def validate_sex(cccd):
     cccd_sex_code = cccd.identityNumber[3]
     # cccd_year = int(datetime.fromisoformat(
     #     cccd.birthday).date().strftime("%Y"))
-    cccd_year = int(cccd.birthday[0:4])
+    cccd_year = int(cccd.birthday.split("-")[2])
     for item in sex:
         if(int(item["fromDate"]) <= cccd_year <= (int(item["endDate"])) and item["sex"] == cccd_sex):
             if(int(item["id"]) != int(cccd_sex_code)):
@@ -57,7 +58,8 @@ def validate_province_identity_number(cccd):
 
 def validate_birthday(cccd):
     cccd_year = cccd.identityNumber[4:6]
-    birthday_year = cccd.birthday[2:4]
+    birthday_year = cccd.birthday.split("-")[2]
+    birthday_year = birthday_year[2:4]
     if(cccd_year != birthday_year):
         raise Exception_Handle(name=__name__, step=2,
                                code=200,
